@@ -8,6 +8,7 @@ import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
+import { container, context as DiContext } from "./di";
 import { App } from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -18,7 +19,12 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <DiContext.Provider value={() => container}>
+    <App />
+  </DiContext.Provider>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

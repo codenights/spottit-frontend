@@ -1,0 +1,12 @@
+query spot($id: String!) {
+  spot(id: $id) {
+    id
+    name
+    description
+    location {
+      latitude
+      longitude
+      address
+    }
+  }
+}
