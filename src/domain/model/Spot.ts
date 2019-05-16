@@ -10,3 +10,11 @@ export interface Spot {
   description: string | null;
   location: SpotLocation;
 }
+
+export class CreateSpotCommand {
+  constructor(
+    public name: string,
+    public location: Location,
+    public description?: string
+  ) {}
+}

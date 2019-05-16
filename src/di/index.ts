@@ -1,6 +1,7 @@
 import { createContainer, asClass, asValue } from "awilix";
 import { GetSpot } from "../domain/usecase/GetSpot";
 import { SearchSpots } from "../domain/usecase/SearchSpots";
+import { CreateSpot } from "../domain/usecase/CreateSpot";
 import { SpotRepositoryGql } from "../infrastructure/repository/SpotRepositoryGql";
 import { GraphQlService } from "../infrastructure/services/Graphql";
 import { AuthService } from "../infrastructure/services/AuthService";
@@ -31,7 +32,8 @@ const dependencies: DiContainer = {
 
   // Use case
   getSpot: asClass(GetSpot).singleton(),
-  searchSpots: asClass(SearchSpots).singleton()
+  searchSpots: asClass(SearchSpots).singleton(),
+  createSpot: asClass(CreateSpot).singleton()
 };
 
 container.register(dependencies as any);

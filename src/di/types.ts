@@ -6,6 +6,7 @@ import { Cache } from "../infrastructure/services/Cache";
 import { SpotRepository } from "../domain/repository/SpotRepository";
 import { GetSpot } from "../domain/usecase/GetSpot";
 import { SearchSpots } from "../domain/usecase/SearchSpots";
+import { CreateSpot } from "../domain/usecase/CreateSpot";
 
 export interface DiContainer {
   // Configuration
@@ -22,6 +23,7 @@ export interface DiContainer {
   // Use case
   getSpot: Resolver<GetSpot>;
   searchSpots: Resolver<SearchSpots>;
+  createSpot: Resolver<CreateSpot>;
 }
 
 export type DependencyKey = keyof DiContainer;
