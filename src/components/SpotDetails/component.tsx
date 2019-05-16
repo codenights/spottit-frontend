@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
 
-import { getSpot } from "../../domain/usecase/get-spot";
-import { Spot } from "../../domain/model/Spot";
 import { H1, Paragraph } from "../../ui/Typography";
 import { Wrapper, Markdown } from "./styles";
+import { useSpot } from "./hooks";
 
 export interface SpotDetailsProps {
   spotId: string;
@@ -19,11 +18,7 @@ const Heading = (props: any) => {
 };
 
 export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
-  const [spot, setSpot] = useState<Spot | null>(null);
-
-  useEffect(() => {
-    getSpot(spotId).then(setSpot);
-  }, [spotId]);
+  const spot = useSpot(spotId);
 
   if (!spot) {
     return <div>Loading...</div>;

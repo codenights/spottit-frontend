@@ -1,0 +1,14 @@
+query spots($latitude: Float!, $longitude: Float!, $radius: Float!) {
+  spots(
+    filter: { latitude: $latitude, longitude: $longitude, radius: $radius }
+  ) {
+    id
+    name
+    description
+    location {
+      latitude
+      longitude
+      address
+    }
+  }
+}
