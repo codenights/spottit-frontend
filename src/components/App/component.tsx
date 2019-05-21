@@ -24,7 +24,28 @@ export const App: React.FC<AppProps> = () => {
         <AppBar />
         <ContentWrapper>
           <Switch>
-            <Route path="/oauth2/callback" exact render={() => <OAuth2 />} />
+            <Route
+              path="/oauth2/callback"
+              exact
+              render={() => {
+                const searchParams = new URLSearchParams(
+                  window.location.search
+                );
+                const accessToken = searchParams.get("accessToken");
+                const refreshToken = searchParams.get("refreshToken");
+
+                if (!accessToken || !refreshToken) {
+                  throw new Error("Invalid auth redirect URI");
+                }
+
+                return (
+                  <OAuth2
+                    accessToken={accessToken}
+                    refreshToken={refreshToken}
+                  />
+                );
+              }}
+            />
             <Route path="/s" render={() => <SpotsMap />} />
             <Redirect to="/s" />
           </Switch>

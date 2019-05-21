@@ -3,28 +3,28 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: spot
+// GraphQL query operation: FetchSpot
 // ====================================================
 
-export interface spot_spot_location {
+export interface FetchSpot_spot_location {
   __typename: "Location";
   latitude: number;
   longitude: number;
   address: string | null;
 }
 
-export interface spot_spot {
+export interface FetchSpot_spot {
   __typename: "Spot";
   id: string;
   name: string;
   description: string | null;
-  location: spot_spot_location;
+  location: FetchSpot_spot_location;
 }
 
-export interface spot {
-  spot: spot_spot;
+export interface FetchSpot {
+  spot: FetchSpot_spot;
 }
 
-export interface spotVariables {
+export interface FetchSpotVariables {
   id: string;
 }

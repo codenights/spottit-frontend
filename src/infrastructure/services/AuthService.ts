@@ -1,60 +1,18 @@
-import { Cache } from "./Cache";
-
-interface Dependencies {
-  cache: Cache;
+export interface Tokens {
+  accessToken: string | null;
+  refreshToken: string | null;
 }
 
-type Subscriber = (isLoggedIn: boolean) => void;
+export type AuthSubscriber = (isLoggedIn: boolean) => void;
 
-export class AuthService {
-  private cache: Cache;
-  private accessToken: string | null;
-  private refreshToken: string | null;
-  private subscribers: Subscriber[];
+export interface AuthService {
+  login(accessToken: string, refreshToken: string): void;
 
-  public constructor({ cache }: Dependencies) {
-    this.cache = cache;
-    this.accessToken = this.cache.getItem("accessToken");
-    this.refreshToken = this.cache.getItem("refreshToken");
-    this.subscribers = [];
-  }
+  logout(): void;
 
-  public login(accessToken: string, refreshToken: string) {
-    this.accessToken = accessToken;
-    this.refreshToken = refreshToken;
+  getTokens(): Tokens;
 
-    this.cache.setItem("accessToken", this.accessToken);
-    this.cache.setItem("refreshToken", this.refreshToken);
+  isLoggedIn(): boolean;
 
-    this.subscribers.forEach(subscriber => subscriber(this.isLoggedIn()));
-  }
-
-  public logout() {
-    this.accessToken = null;
-    this.refreshToken = null;
-
-    this.cache.removeItem("accessToken");
-    this.cache.removeItem("refreshToken");
-
-    this.subscribers.forEach(subscriber => subscriber(this.isLoggedIn()));
-  }
-
-  public getTokens() {
-    return {
-      accessToken: this.accessToken,
-      refreshToken: this.refreshToken
-    };
-  }
-
-  public isLoggedIn() {
-    return Boolean(this.accessToken);
-  }
-
-  public subscribe(subscriber: Subscriber) {
-    this.subscribers.push(subscriber);
-
-    return () => {
-      this.subscribers = this.subscribers.filter(x => x !== subscriber);
-    };
-  }
+  subscribe(subscriber: AuthSubscriber): () => void;
 }

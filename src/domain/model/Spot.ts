@@ -12,6 +12,7 @@ export interface Spot {
 }
 
 export class CreateSpotCommand {
+  // eslint-disable-next-line
   constructor(
     public name: string,
     public location: Location,
