@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { useDependencies } from "../../di";
-import { GetSpot } from "../../domain/usecase/GetSpot";
 import { Spot } from "../../domain/model/Spot";
+import { useDependency } from "../../di";
 
 export const useSpot = (id: string) => {
   const [spot, setSpot] = useState<Spot | null>(null);
-  const container = useDependencies();
-  const getSpot = container.resolve<GetSpot>("getSpot");
+  const getSpot = useDependency("getSpot");
 
   useEffect(() => {
     getSpot.execute(id).then(setSpot);

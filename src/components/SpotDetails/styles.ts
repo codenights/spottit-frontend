@@ -2,16 +2,12 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 
 export const Wrapper = styled.div`
-  height: 100%;
   padding: 20px;
-  overflow-y: hidden;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+  background: #fff;
 `;
 
 export const Markdown = styled(ReactMarkdown)`
-  flex: 1;
-  overflow-y: scroll;
   margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);

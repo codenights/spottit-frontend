@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { useDependencies } from "../../di";
-import { SearchSpots } from "../../domain/usecase/SearchSpots";
 import { Location } from "../../domain/model/Location";
 import { Spot } from "../../domain/model/Spot";
+import { useDependency } from "../../di";
 
 export const useSpots = (center: Location | null) => {
-  const container = useDependencies();
-  const searchSpots = container.resolve<SearchSpots>("searchSpots");
+  const searchSpots = useDependency("searchSpots");
 
   const [results, setResults] = useState<Spot[]>([]);
 
