@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown";
 export const Wrapper = styled.div`
   padding: 20px;
   height: 100%;
-  background: #fff;
 `;
 
 export const Markdown = styled(ReactMarkdown)`

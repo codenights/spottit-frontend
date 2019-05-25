@@ -1,0 +1,24 @@
+mutation createSpot(
+  $name: String!
+  $description: String
+  $latitude: Float!
+  $longitude: Float!
+) {
+  createSpot(
+    input: {
+      name: $name
+      description: $description
+      latitude: $latitude
+      longitude: $longitude
+    }
+  ) {
+    id
+    name
+    description
+    location {
+      latitude
+      longitude
+      address
+    }
+  }
+}
