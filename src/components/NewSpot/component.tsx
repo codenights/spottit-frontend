@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { generateTags } from "../../domain/helpers/generateTags";
+
 import { useDependency } from "../../di";
 import { Label, Input, Textarea, FormGroup, SubmitGroup } from "../../ui/Form";
 import { Button, Link } from "../../ui/Button";
@@ -16,6 +18,7 @@ export interface NewSpotProps {
 export const NewSpot: React.FC<NewSpotProps> = ({ latitude, longitude }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
   const history = useHistory();
   const useCase = useDependency("createSpot");
 
@@ -55,6 +58,19 @@ export const NewSpot: React.FC<NewSpotProps> = ({ latitude, longitude }) => {
               value={title}
               onChange={e => setTitle(e.target.value)}
               placeholder="Enter the spot name"
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <Label htmlFor="spot__tags">Tags</Label>
+            <Input
+              type="text"
+              id="spot__tags"
+              name="spot__tags"
+              required
+              value={tags}
+              onChange={e => setTags(generateTags(e.target.value))}
+              placeholder="#someTags"
             />
           </FormGroup>
 
