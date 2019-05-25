@@ -4,14 +4,20 @@ import { SpotRepository } from "../../domain/repository/SpotRepository";
 import { Spot, CreateSpotCommand } from "../../domain/model/Spot";
 import { Location } from "../../domain/model/Location";
 import { GraphQlService } from "../services/Graphql";
-import { spot, spotVariables } from "./queries/__generated__/spot";
-import { spotsVariables, spots } from "./queries/__generated__/spots";
 import {
-  createSpot,
-  createSpotVariables
+  FetchSpot,
+  FetchSpotVariables
+} from "./queries/__generated__/FetchSpot";
+import {
+  SearchSpotsVariables,
+  SearchSpots
+} from "./queries/__generated__/SearchSpots";
+import {
+  CreateSpotVariables,
+  CreateSpot
 } from "./queries/__generated__/createSpot";
 
-const queries = {
+export const queries = {
   SPOT: loader("./queries/spot.graphql"),
   SEARCH_SPOT: loader("./queries/search-spots.graphql"),
   CREATE_SPOT: loader("./queries/create-spot.graphql")
@@ -30,7 +36,7 @@ export class SpotRepositoryGql implements SpotRepository {
 
   public getSpot(id: string): Promise<Spot> {
     return this.graphql
-      .query<spotVariables, spot>(queries.SPOT, {
+      .query<FetchSpotVariables, FetchSpot>(queries.SPOT, {
         id
       })
       .then(response => response.spot);
@@ -41,7 +47,7 @@ export class SpotRepositoryGql implements SpotRepository {
     radius: number
   ): Promise<Spot[]> {
     return this.graphql
-      .query<spotsVariables, spots>(queries.SEARCH_SPOT, {
+      .query<SearchSpotsVariables, SearchSpots>(queries.SEARCH_SPOT, {
         latitude: location.latitude,
         longitude: location.longitude,
         radius
@@ -51,7 +57,7 @@ export class SpotRepositoryGql implements SpotRepository {
 
   public createSpot(createSpot: CreateSpotCommand) {
     return this.graphql
-      .mutate<createSpotVariables, createSpot>(queries.CREATE_SPOT, {
+      .mutate<CreateSpotVariables, CreateSpot>(queries.CREATE_SPOT, {
         description: createSpot.description,
         latitude: createSpot.location.latitude,
         longitude: createSpot.location.longitude,

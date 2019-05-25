@@ -1,4 +1,4 @@
-mutation createSpot(
+mutation CreateSpot(
   $name: String!
   $description: String
   $latitude: Float!

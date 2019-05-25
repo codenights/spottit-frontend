@@ -1,4 +1,4 @@
-query spot($id: String!) {
+query FetchSpot($id: String!) {
   spot(id: $id) {
     id
     name

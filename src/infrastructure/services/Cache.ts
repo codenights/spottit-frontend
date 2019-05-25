@@ -1,13 +1,7 @@
-export class Cache {
-  public setItem(key: string, value: string) {
-    localStorage.setItem(key, value);
-  }
+export interface Cache {
+  setItem(key: string, value: string): void;
 
-  public getItem(key: string) {
-    return localStorage.getItem(key);
-  }
+  getItem(key: string): string | null;
 
-  public removeItem(key: string) {
-    localStorage.removeItem(key);
-  }
+  removeItem(key: string): void;
 }

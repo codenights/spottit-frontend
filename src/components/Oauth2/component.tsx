@@ -4,23 +4,21 @@ import { Redirect } from "react-router";
 import { useLoggedIn } from "../../hooks/useLoggedIn";
 import { useDependency } from "../../di";
 
-export interface OAuth2Props {}
+export interface OAuth2Props {
+  accessToken: string;
+  refreshToken: string;
+}
 
-export const OAuth2: React.FC<OAuth2Props> = () => {
+export const OAuth2: React.FC<OAuth2Props> = ({
+  accessToken,
+  refreshToken
+}) => {
   const isLoggedIn = useLoggedIn();
   const authService = useDependency("authService");
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const accessToken = searchParams.get("accessToken");
-    const refreshToken = searchParams.get("refreshToken");
-
-    if (!accessToken || !refreshToken) {
-      throw new Error("Invalid auth redirect URI");
-    }
-
     authService.login(accessToken, refreshToken);
-  }, [authService]);
+  }, [authService, accessToken, refreshToken]);
 
   return isLoggedIn ? <Redirect to="/" /> : null;
 };

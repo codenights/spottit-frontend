@@ -1,4 +1,4 @@
-query spots($latitude: Float!, $longitude: Float!, $radius: Float!) {
+query SearchSpots($latitude: Float!, $longitude: Float!, $radius: Float!) {
   spots(
     filter: { latitude: $latitude, longitude: $longitude, radius: $radius }
   ) {
