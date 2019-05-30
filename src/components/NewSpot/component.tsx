@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Circle, Map, TileLayer } from "react-leaflet";
 
 import { useDependency } from "../../di";
 import { Label, Input, Textarea, FormGroup, SubmitGroup } from "../../ui/Form";
 import { Button, Link } from "../../ui/Button";
+import { Map } from "../../ui/Map";
 
-import { Content } from "./styles";
 import { useHistory } from "../../hooks/useHistory";
+import { Content } from "./styles";
 
 export interface NewSpotProps {
   latitude: number;
@@ -36,22 +36,12 @@ export const NewSpot: React.FC<NewSpotProps> = ({ latitude, longitude }) => {
   return (
     <div>
       <Map
-        zoom={16}
-        center={[latitude, longitude]}
+        zoomLevel={17}
+        currentPosition={{ latitude, longitude }}
+        center={{ latitude, longitude }}
         style={{ height: "150px" }}
-        dragging={false}
-        zoomControl={false}
-      >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-        <Circle
-          center={[latitude, longitude]}
-          color="red"
-          fillColor="#f03"
-          fillOpacity={0.5}
-          radius={20}
-        />
-      </Map>
+        isFixed={true}
+      />
 
       <Content>
         <form onSubmit={onSubmit}>

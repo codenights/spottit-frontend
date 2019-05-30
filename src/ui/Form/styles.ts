@@ -1,31 +1,35 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
+
+import { color, spacing } from "../Theme";
 
 export const FormGroup = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: ${spacing("formGroupMargin")};
 `;
 
 export const Label = styled.label`
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: ${spacing("labelMargin")};
 `;
 
 export const Input = styled.input`
   all: unset;
   font-size: inherit;
-  border: 1px solid rgba(0, 0, 0, 0.25);
+
   display: block;
   width: 100%;
-  padding: 10px 16px;
+  padding: ${spacing("inputPadding")};
+  border: 1px solid ${color("neutral20")};
   box-sizing: border-box;
 `;
 
 export const Textarea = styled.textarea`
   all: unset;
   font-size: inherit;
-  border: 1px solid rgba(0, 0, 0, 0.25);
+
   display: block;
   width: 100%;
-  padding: 10px 16px;
+  padding: ${spacing("inputPadding")};
+  border: 1px solid ${color("neutral20")};
   box-sizing: border-box;
 `;
 

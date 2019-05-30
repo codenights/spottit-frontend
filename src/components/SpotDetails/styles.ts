@@ -1,30 +1,58 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import ReactMarkdown from "react-markdown";
 
+import { spacing } from "../../ui/Theme";
+
+export const Header = styled.div`
+  position: relative;
+  margin: -${spacing("default")} -${spacing("default")} ${spacing("default")} -${spacing("default")};
+`;
+
+export const SpotInfo = styled.p`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1002;
+  padding: ${spacing("default")};
+  padding-bottom: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+
+  > :nth-child(2) {
+    font-size: 1.2rem;
+  }
+
+  ::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+  }
+`;
+
 export const Wrapper = styled.div`
-  padding: 20px;
-  height: 100%;
+  padding: ${spacing("contentPadding")};
 `;
 
 export const Markdown = styled(ReactMarkdown)`
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-
-  .heading {
-    font-size: 3rem;
-  }
-
-  h2 {
+  h1 {
     font-size: 2.5rem;
   }
 
-  h3 {
+  h2 {
     font-size: 2rem;
   }
 
+  h3 {
+    font-size: 1.8rem;
+  }
+
   h4 {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
 
   h5 {

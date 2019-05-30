@@ -1,5 +1,8 @@
 import React from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components/macro";
+
+import { theme } from "./theme";
+import { fontSize, color } from "./utils";
 
 export interface ThemeProps {}
 
@@ -22,17 +25,15 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-size: 1.6rem;
+    font-size: ${fontSize("base")};
     line-height: 1.25;
-    font-family: 'PT Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: ${color("neutral80")}
   }
 
   #root {
-    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    min-height: 100vh;
   }
 `;
-
-const theme = {};
