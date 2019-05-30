@@ -1,11 +1,15 @@
 import { BaseAuthService } from "./BaseAuthService";
-import { Cache } from "./Cache";
+import { HttpService, successResponse, failureResponse } from "./HttpService";
 
 describe("BaseAuthService", () => {
   let authService: BaseAuthService;
+  let httpService: HttpService;
 
   beforeEach(() => {
-    authService = new BaseAuthService();
+    httpService = {
+      post: jest.fn().mockResolvedValue(null)
+    };
+    authService = new BaseAuthService({ httpService });
   });
 
   it("login: should set the access token", () => {
@@ -103,5 +107,51 @@ describe("BaseAuthService", () => {
     expect(subscriber).toHaveBeenCalledTimes(2);
     expect(subscriber).toHaveBeenNthCalledWith(1, true);
     expect(subscriber).toHaveBeenNthCalledWith(2, false);
+  });
+
+  it("refreshTokens: should post /refresh", async () => {
+    // Given
+    const refreshToken = "refresh-token";
+    (httpService.post as jest.Mock).mockResolvedValue(
+      successResponse(200, { accessToken: "" })
+    );
+    authService.login("access-token", refreshToken);
+
+    // When
+    await authService.refreshTokens();
+
+    // Then
+    expect(httpService.post).toHaveBeenCalledTimes(1);
+    expect(httpService.post).toHaveBeenCalledWith("/refresh", {
+      refreshToken
+    });
+  });
+
+  it("refreshTokens: should refresh the access token on success", async () => {
+    // Given
+    const accessToken = "access-token";
+    (httpService.post as jest.Mock).mockResolvedValue(
+      successResponse(200, { accessToken })
+    );
+
+    // When
+    await authService.refreshTokens();
+
+    // Then
+    expect(authService.getTokens().accessToken).toEqual(accessToken);
+  });
+
+  it("refreshTokens: should logout on failure", async () => {
+    // Given
+    (httpService.post as jest.Mock).mockResolvedValue(
+      failureResponse(403, new Error("Something went wrong"))
+    );
+
+    // When
+    await authService.refreshTokens();
+
+    // Then
+    expect(authService.getTokens().accessToken).toEqual(null);
+    expect(authService.getTokens().refreshToken).toEqual(null);
   });
 });

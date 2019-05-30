@@ -15,4 +15,6 @@ export interface AuthService {
   isLoggedIn(): boolean;
 
   subscribe(subscriber: AuthSubscriber): () => void;
+
+  refreshTokens(): Promise<void>;
 }

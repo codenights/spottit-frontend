@@ -18,6 +18,7 @@ describe("CachedAuthService", () => {
       isLoggedIn: jest.fn(),
       login: jest.fn(),
       logout: jest.fn(),
+      refreshTokens: jest.fn(),
       subscribe: jest.fn().mockReturnValue(() => {})
     };
     cachedAuthService = new CachedAuthService({
@@ -129,5 +130,38 @@ describe("CachedAuthService", () => {
     expect(baseAuthService.subscribe).toHaveBeenCalledTimes(1);
     expect(baseAuthService.subscribe).toHaveBeenCalledWith(subscriber);
     expect(unsubscribe).toEqual(expect.any(Function));
+  });
+
+  it("refreshTokens: should return the result of the decorated service", async () => {
+    // Given
+    (baseAuthService.refreshTokens as jest.Mock).mockResolvedValue(null);
+    (baseAuthService.getTokens as jest.Mock).mockReturnValue({
+      accessToken: "access-token",
+      refreshToken: "refresh-token"
+    });
+
+    // When
+    const result = await cachedAuthService.refreshTokens();
+
+    // Then
+    expect(result).toBe(null);
+    expect(baseAuthService.refreshTokens).toHaveBeenCalledTimes(1);
+  });
+
+  it("refreshTokens: should cache the new access token", async () => {
+    // Given
+    const accessToken = "access-token";
+    (baseAuthService.refreshTokens as jest.Mock).mockResolvedValue(null);
+    (baseAuthService.getTokens as jest.Mock).mockReturnValue({
+      accessToken,
+      refreshToken: "refresh-token"
+    });
+
+    // When
+    const result = await cachedAuthService.refreshTokens();
+
+    // Then
+    expect(cache.setItem).toHaveBeenCalledTimes(1);
+    expect(cache.setItem).toHaveBeenCalledWith("accessToken", accessToken);
   });
 });
