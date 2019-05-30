@@ -1,30 +1,57 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useSpring, useChain, animated } from "react-spring";
 
+import { Spot } from "../../domain/model/Spot";
 import { Map } from "../../ui/Map";
 import { useSpot } from "./hooks";
 import { AuthoredBy, Wrapper, Markdown, Header, SpotInfo } from "./styles";
 
 export interface SpotDetailsProps {
-  spotId: string;
+  spot: Spot;
 }
 
-export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
-  const spot = useSpot(spotId);
+export const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
+  const mapAnimationRef = useRef<any>();
+  const mapAnimation = useSpring({
+    from: { opacity: 0, transform: "scale(1.2)" },
+    opacity: 1,
+    transform: "scale(1)",
+    ref: mapAnimationRef
+  });
 
-  if (!spot) {
-    return <div>Loading...</div>;
-  }
+  const headerAnimationRef = useRef<any>();
+  const headerAnimation = useSpring({
+    from: { opacity: 0, transform: "translateY(-40px)" },
+    opacity: 1,
+    transform: "translateY(0)",
+    ref: headerAnimationRef
+  });
+
+  const descriptionAnimationRef = useRef<any>();
+  const descriptionAnimation = useSpring({
+    from: { opacity: 0, transform: "translateY(40px)" },
+    opacity: 1,
+    transform: "translateY(0)",
+    ref: descriptionAnimationRef
+  });
+
+  useChain(
+    [mapAnimationRef, headerAnimationRef, descriptionAnimationRef],
+    [0, 0.4, 0.4]
+  );
 
   return (
     <Wrapper>
       <Header>
-        <Map
-          isFixed={true}
-          center={spot.location}
-          zoomLevel={17}
-          style={{ height: "250px" }}
-        />
-        <SpotInfo>
+        <animated.div style={mapAnimation}>
+          <Map
+            isFixed={true}
+            center={spot.location}
+            zoomLevel={17}
+            style={{ height: "250px" }}
+          />
+        </animated.div>
+        <SpotInfo style={headerAnimation}>
           <p>{spot.name}</p>
           {spot.location.address && <p>{spot.location.address}</p>}
         </SpotInfo>
@@ -33,7 +60,12 @@ export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
       <AuthoredBy>
         Added by <span>{spot.author.username}</span>
       </AuthoredBy>
-      {spot.description && <Markdown source={spot.description} />}
+      {spot.description && (
+        <animated.div style={descriptionAnimation}>
+          {" "}
+          <Markdown source={spot.description} />
+        </animated.div>
+      )}
     </Wrapper>
   );
 };

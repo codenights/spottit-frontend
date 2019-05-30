@@ -1,14 +1,16 @@
 import styled from 'styled-components/macro'
 import ReactMarkdown from 'react-markdown'
+import { animated } from 'react-spring'
 
 import { spacing } from '../../ui/Theme'
 
 export const Header = styled.div`
   position: relative;
+  overflow: hidden;
   margin: -${spacing('default')} -${spacing('default')} ${spacing('default')} -${spacing('default')};
 `
 
-export const SpotInfo = styled.div`
+export const SpotInfo = styled(animated.div)`
   position: absolute;
   top: 0;
   left: 0;
