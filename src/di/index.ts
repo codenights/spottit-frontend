@@ -10,6 +10,7 @@ import { BaseAuthService } from "../infrastructure/services/BaseAuthService";
 import { CachedAuthService } from "../infrastructure/services/CachedAuthService";
 
 import { DiContainer } from "./types";
+import { FetchHttpService } from "../infrastructure/services/FetchHttpService";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -26,10 +27,10 @@ const dependencies: DiContainer = {
   apiUrl: asValue(apiUrl),
 
   // Services
+  httpService: asClass(FetchHttpService).singleton(),
   graphqlService: asClass(GraphQlApolloService).singleton(),
-  authService: asClass(CachedAuthService)
-    .inject(() => ({ baseAuthService: new BaseAuthService() }))
-    .singleton(),
+  baseAuthService: asClass(BaseAuthService).singleton(),
+  authService: asClass(CachedAuthService).singleton(),
   cache: asClass(CacheLocalStorage).singleton(),
 
   // Repositories

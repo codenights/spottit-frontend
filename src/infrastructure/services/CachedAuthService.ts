@@ -47,4 +47,8 @@ export class CachedAuthService implements AuthService {
   public subscribe(subscriber: AuthSubscriber) {
     return this.authService.subscribe(subscriber);
   }
+
+  public refreshTokens() {
+    return this.authService.refreshTokens();
+  }
 }

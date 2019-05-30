@@ -18,6 +18,7 @@ describe("CachedAuthService", () => {
       isLoggedIn: jest.fn(),
       login: jest.fn(),
       logout: jest.fn(),
+      refreshTokens: jest.fn(),
       subscribe: jest.fn().mockReturnValue(() => {})
     };
     cachedAuthService = new CachedAuthService({
@@ -129,5 +130,17 @@ describe("CachedAuthService", () => {
     expect(baseAuthService.subscribe).toHaveBeenCalledTimes(1);
     expect(baseAuthService.subscribe).toHaveBeenCalledWith(subscriber);
     expect(unsubscribe).toEqual(expect.any(Function));
+  });
+
+  it("refreshTokens: should return the result of the decorated service", async () => {
+    // Given
+    (baseAuthService.refreshTokens as jest.Mock).mockResolvedValue(null);
+
+    // When
+    const result = await cachedAuthService.refreshTokens();
+
+    // Then
+    expect(result).toBe(null);
+    expect(baseAuthService.refreshTokens).toHaveBeenCalledTimes(1);
   });
 });

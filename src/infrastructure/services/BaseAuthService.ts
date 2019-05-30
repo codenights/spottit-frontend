@@ -1,14 +1,21 @@
 import { AuthService, AuthSubscriber } from "./AuthService";
+import { HttpService } from "./HttpService";
+
+interface Dependencies {
+  httpService: HttpService;
+}
 
 export class BaseAuthService implements AuthService {
   private accessToken: string | null;
   private refreshToken: string | null;
   private subscribers: AuthSubscriber[];
+  private httpService: HttpService;
 
-  public constructor() {
+  public constructor({ httpService }: Dependencies) {
     this.accessToken = null;
     this.refreshToken = null;
     this.subscribers = [];
+    this.httpService = httpService;
   }
 
   public login(accessToken: string, refreshToken: string) {
@@ -42,5 +49,19 @@ export class BaseAuthService implements AuthService {
     return () => {
       this.subscribers = this.subscribers.filter(x => x !== subscriber);
     };
+  }
+
+  public async refreshTokens() {
+    return this.httpService
+      .post<{ accessToken: string }>("/refresh", {
+        refreshToken: this.refreshToken
+      })
+      .then(response => {
+        if (response.isSuccess) {
+          this.accessToken = response.data.accessToken;
+        } else {
+          this.logout();
+        }
+      });
   }
 }
