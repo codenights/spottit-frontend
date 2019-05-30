@@ -1,9 +1,7 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
-export const H1 = styled.h1`
-  font-size: 3.5rem;
-`;
+import { spacing } from "../Theme";
 
 export const Paragraph = styled.p`
-  margin: 10px 0;
+  margin: ${spacing("paragraphMargin")};
 `;

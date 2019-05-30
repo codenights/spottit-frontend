@@ -1,21 +1,12 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
 
-import { H1, Paragraph } from "../../ui/Typography";
-import { Wrapper, Markdown } from "./styles";
+import { Map } from "../../ui/Map";
 import { useSpot } from "./hooks";
+import { Wrapper, Markdown, Header, SpotInfo } from "./styles";
 
 export interface SpotDetailsProps {
   spotId: string;
 }
-
-const Heading = (props: any) => {
-  if (props.level === 1) {
-    return <div className="heading">{props.children}</div>;
-  }
-
-  return <ReactMarkdown.renderers.heading {...props} />;
-};
 
 export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
   const spot = useSpot(spotId);
@@ -26,11 +17,20 @@ export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
 
   return (
     <Wrapper>
-      <H1>{spot.name}</H1>
-      <Paragraph>{spot.location.address}</Paragraph>
-      {spot.description && (
-        <Markdown source={spot.description} renderers={{ heading: Heading }} />
-      )}
+      <Header>
+        <Map
+          isFixed={true}
+          center={spot.location}
+          zoomLevel={17}
+          style={{ height: "250px" }}
+        />
+        <SpotInfo>
+          <p>{spot.name}</p>
+          {spot.location.address && <p>{spot.location.address}</p>}
+        </SpotInfo>
+      </Header>
+
+      {spot.description && <Markdown source={spot.description} />}
     </Wrapper>
   );
 };
