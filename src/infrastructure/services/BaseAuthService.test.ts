@@ -1,5 +1,4 @@
 import { BaseAuthService } from "./BaseAuthService";
-import { Cache } from "./Cache";
 import { HttpService, successResponse, failureResponse } from "./HttpService";
 
 describe("BaseAuthService", () => {
@@ -144,7 +143,6 @@ describe("BaseAuthService", () => {
 
   it("refreshTokens: should logout on failure", async () => {
     // Given
-    const accessToken = "access-token";
     (httpService.post as jest.Mock).mockResolvedValue(
       failureResponse(403, new Error("Something went wrong"))
     );

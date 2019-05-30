@@ -2,7 +2,6 @@ import ApolloClient from "apollo-boost";
 
 import { AuthService } from "./AuthService";
 import { GraphQlService } from "./Graphql";
-import { HttpService } from "./HttpService";
 
 interface Dependencies {
   apiUrl: string;
