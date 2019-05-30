@@ -2,9 +2,7 @@ import styled from 'styled-components/macro'
 import { color, spacing } from '../../ui/Theme'
 
 export const Wrapper = styled.div`
-  flex: 1;
-  position: relative;
-  overflow: hidden;
+  height: 100%;
 
   .map {
     position: absolute;

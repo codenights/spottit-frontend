@@ -40,6 +40,7 @@
     "react-markdown": "^4.0.8",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
+    "react-spring": "^8.0.20",
     "reset.css": "^2.0.2",
     "styled-components": "^4.2.0",
     "typescript": "3.4.5"

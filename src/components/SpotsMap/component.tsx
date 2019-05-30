@@ -8,6 +8,7 @@ import { useHistory } from "../../hooks/useHistory";
 import { Map } from "../../ui/Map";
 
 import { Wrapper, SpotsList, SpotItem, Pusher } from "./styles";
+import { LoadingAnimation } from "./LoadingAnimation";
 import { useSpots } from "./hooks";
 
 export interface SpotsMapProps {}
@@ -49,7 +50,7 @@ export const SpotsMap: React.FC<SpotsMapProps> = () => {
   return (
     <Wrapper>
       {!location || !center ? (
-        <div>Acquiring location...</div>
+        <LoadingAnimation />
       ) : (
         <Map
           isFixed={false}
