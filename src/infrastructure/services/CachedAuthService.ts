@@ -49,6 +49,14 @@ export class CachedAuthService implements AuthService {
   }
 
   public refreshTokens() {
-    return this.authService.refreshTokens();
+    return this.authService.refreshTokens().then(value => {
+      const accessToken = this.authService.getTokens().accessToken;
+
+      if (accessToken) {
+        this.cache.setItem("accessToken", accessToken);
+      }
+
+      return value;
+    });
   }
 }

@@ -135,6 +135,10 @@ describe("CachedAuthService", () => {
   it("refreshTokens: should return the result of the decorated service", async () => {
     // Given
     (baseAuthService.refreshTokens as jest.Mock).mockResolvedValue(null);
+    (baseAuthService.getTokens as jest.Mock).mockReturnValue({
+      accessToken: "access-token",
+      refreshToken: "refresh-token"
+    });
 
     // When
     const result = await cachedAuthService.refreshTokens();
@@ -142,5 +146,22 @@ describe("CachedAuthService", () => {
     // Then
     expect(result).toBe(null);
     expect(baseAuthService.refreshTokens).toHaveBeenCalledTimes(1);
+  });
+
+  it("refreshTokens: should cache the new access token", async () => {
+    // Given
+    const accessToken = "access-token";
+    (baseAuthService.refreshTokens as jest.Mock).mockResolvedValue(null);
+    (baseAuthService.getTokens as jest.Mock).mockReturnValue({
+      accessToken,
+      refreshToken: "refresh-token"
+    });
+
+    // When
+    const result = await cachedAuthService.refreshTokens();
+
+    // Then
+    expect(cache.setItem).toHaveBeenCalledTimes(1);
+    expect(cache.setItem).toHaveBeenCalledWith("accessToken", accessToken);
   });
 });
