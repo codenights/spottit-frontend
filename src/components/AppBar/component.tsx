@@ -14,7 +14,7 @@ export const AppBar: React.FC<AppBarProps> = () => {
   const authService = useDependency("authService");
   const isLoggedIn = useLoggedIn();
 
-  const loginUrl = `${apiUrl}/authorize/google?redirect=${
+  const loginUrl = `${apiUrl}/login/?redirect=${
     window.location.origin
   }/oauth2/callback`;
 
