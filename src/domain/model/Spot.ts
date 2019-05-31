@@ -11,6 +11,12 @@ export interface Spot {
   location: SpotLocation;
 }
 
+export interface DetailedSpot extends Spot {
+  author: {
+    username: string;
+  };
+}
+
 export class CreateSpotCommand {
   // eslint-disable-next-line
   constructor(

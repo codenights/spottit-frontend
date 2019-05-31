@@ -2,7 +2,7 @@ import React from "react";
 
 import { Map } from "../../ui/Map";
 import { useSpot } from "./hooks";
-import { Wrapper, Markdown, Header, SpotInfo } from "./styles";
+import { AuthoredBy, Wrapper, Markdown, Header, SpotInfo } from "./styles";
 
 export interface SpotDetailsProps {
   spotId: string;
@@ -30,6 +30,9 @@ export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
         </SpotInfo>
       </Header>
 
+      <AuthoredBy>
+        Added by <span>{spot.author.username}</span>
+      </AuthoredBy>
       {spot.description && <Markdown source={spot.description} />}
     </Wrapper>
   );

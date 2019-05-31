@@ -8,5 +8,8 @@ query FetchSpot($id: String!) {
       longitude
       address
     }
+    author {
+      username
+    }
   }
 }

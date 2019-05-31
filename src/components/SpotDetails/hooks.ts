@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { Spot } from "../../domain/model/Spot";
+import { DetailedSpot } from "../../domain/model/Spot";
 import { useDependency } from "../../di";
 
 export const useSpot = (id: string) => {
-  const [spot, setSpot] = useState<Spot | null>(null);
+  const [spot, setSpot] = useState<DetailedSpot | null>(null);
   const getSpot = useDependency("getSpot");
 
   useEffect(() => {
