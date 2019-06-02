@@ -1,21 +1,21 @@
-import { SpotRepository } from "../repository/SpotRepository";
-import { Location } from "../model/Location";
-import { Spot, CreateSpotCommand } from "../model/Spot";
+import { SpotRepository } from '../repository/SpotRepository'
+import { Location } from '../model/Location'
+import { Spot, CreateSpotCommand } from '../model/Spot'
 import {
   UseCaseResult,
   createUseCaseSuccess,
-  createUseCaseFailure
-} from "../model/UseCaseResult";
+  createUseCaseFailure,
+} from '../model/UseCaseResult'
 
 interface Dependencies {
-  spotRepository: SpotRepository;
+  spotRepository: SpotRepository
 }
 
 export class CreateSpot {
-  private spotRepository: SpotRepository;
+  private spotRepository: SpotRepository
 
   public constructor({ spotRepository }: Dependencies) {
-    this.spotRepository = spotRepository;
+    this.spotRepository = spotRepository
   }
 
   public execute(
@@ -23,15 +23,11 @@ export class CreateSpot {
     location: Location,
     description?: string
   ): Promise<UseCaseResult<Spot, Error>> {
-    const createSpotCommand = new CreateSpotCommand(
-      name,
-      location,
-      description
-    );
+    const createSpotCommand = new CreateSpotCommand(name, location, description)
 
     return this.spotRepository
       .createSpot(createSpotCommand)
       .then(createUseCaseSuccess)
-      .catch(createUseCaseFailure);
+      .catch(createUseCaseFailure)
   }
 }

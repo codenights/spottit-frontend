@@ -1,19 +1,19 @@
-import { SpotRepository } from "../repository/SpotRepository";
-import { Spot } from "../model/Spot";
-import { Location } from "../model/Location";
+import { SpotRepository } from '../repository/SpotRepository'
+import { Spot } from '../model/Spot'
+import { Location } from '../model/Location'
 
 interface Dependencies {
-  spotRepository: SpotRepository;
+  spotRepository: SpotRepository
 }
 
 export class SearchSpots {
-  private spotRepository: SpotRepository;
+  private spotRepository: SpotRepository
 
   public constructor({ spotRepository }: Dependencies) {
-    this.spotRepository = spotRepository;
+    this.spotRepository = spotRepository
   }
 
   public execute(location: Location): Promise<Spot[]> {
-    return this.spotRepository.getSpotsByLocation(location, 7);
+    return this.spotRepository.getSpotsByLocation(location, 7)
   }
 }

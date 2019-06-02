@@ -1,5 +1,5 @@
-import styled from "styled-components/macro";
-import { color, spacing } from "../../ui/Theme";
+import styled from 'styled-components/macro'
+import { color, spacing } from '../../ui/Theme'
 
 export const Wrapper = styled.div`
   flex: 1;
@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 75%;
   }
-`;
+`
 
 export const SpotsList = styled.ul`
   position: absolute;
@@ -20,7 +20,7 @@ export const SpotsList = styled.ul`
   height: 25%;
   display: flex;
   overflow-x: auto;
-  padding: ${spacing("contentPadding")} 0;
+  padding: ${spacing('contentPadding')} 0;
   scroll-snap-type: x mandatory;
 
   > li {
@@ -30,14 +30,14 @@ export const SpotsList = styled.ul`
   }
 
   > li + li {
-    margin-left: ${spacing("default")};
+    margin-left: ${spacing('default')};
   }
-`;
+`
 
 // TODO: fix me with CSS pseudo elements?
 export const Pusher = styled.li`
   flex-basis: 20%;
-`;
+`
 
 export const SpotItem = styled.div`
   padding: 20px;
@@ -49,6 +49,6 @@ export const SpotItem = styled.div`
   }
 
   > :nth-child(2) {
-    color: ${color("neutral60")};
+    color: ${color('neutral60')};
   }
-`;
+`

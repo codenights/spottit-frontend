@@ -1,9 +1,9 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro'
 
 // As React-leaflet puts a z-index of 1000
 // on the map, we need to place the AppBar above
 // so that the shadow is visible
-const Z_INDEX = 1500;
+const Z_INDEX = 1500
 
 export const Wrapper = styled.header`
   position: sticky;
@@ -15,4 +15,4 @@ export const Wrapper = styled.header`
     justify-content: space-between;
     align-items: center;
   }
-`;
+`

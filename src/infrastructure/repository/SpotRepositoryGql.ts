@@ -1,45 +1,45 @@
-import { loader } from "graphql.macro";
+import { loader } from 'graphql.macro'
 
-import { SpotRepository } from "../../domain/repository/SpotRepository";
-import { Spot, CreateSpotCommand, DetailedSpot } from "../../domain/model/Spot";
-import { Location } from "../../domain/model/Location";
-import { GraphQlService } from "../services/Graphql";
+import { SpotRepository } from '../../domain/repository/SpotRepository'
+import { Spot, CreateSpotCommand, DetailedSpot } from '../../domain/model/Spot'
+import { Location } from '../../domain/model/Location'
+import { GraphQlService } from '../services/Graphql'
 import {
   FetchSpot,
-  FetchSpotVariables
-} from "./queries/__generated__/FetchSpot";
+  FetchSpotVariables,
+} from './queries/__generated__/FetchSpot'
 import {
   SearchSpotsVariables,
-  SearchSpots
-} from "./queries/__generated__/SearchSpots";
+  SearchSpots,
+} from './queries/__generated__/SearchSpots'
 import {
   CreateSpotVariables,
-  CreateSpot
-} from "./queries/__generated__/createSpot";
+  CreateSpot,
+} from './queries/__generated__/createSpot'
 
 export const queries = {
-  SPOT: loader("./queries/spot.graphql"),
-  SEARCH_SPOT: loader("./queries/search-spots.graphql"),
-  CREATE_SPOT: loader("./queries/create-spot.graphql")
-};
+  SPOT: loader('./queries/spot.graphql'),
+  SEARCH_SPOT: loader('./queries/search-spots.graphql'),
+  CREATE_SPOT: loader('./queries/create-spot.graphql'),
+}
 
 interface Dependencies {
-  graphqlService: GraphQlService;
+  graphqlService: GraphQlService
 }
 
 export class SpotRepositoryGql implements SpotRepository {
-  private graphql: GraphQlService;
+  private graphql: GraphQlService
 
   public constructor({ graphqlService }: Dependencies) {
-    this.graphql = graphqlService;
+    this.graphql = graphqlService
   }
 
   public getSpot(id: string): Promise<DetailedSpot> {
     return this.graphql
       .query<FetchSpotVariables, FetchSpot>(queries.SPOT, {
-        id
+        id,
       })
-      .then(response => response.spot);
+      .then(response => response.spot)
   }
 
   public getSpotsByLocation(
@@ -50,9 +50,9 @@ export class SpotRepositoryGql implements SpotRepository {
       .query<SearchSpotsVariables, SearchSpots>(queries.SEARCH_SPOT, {
         latitude: location.latitude,
         longitude: location.longitude,
-        radius
+        radius,
       })
-      .then(response => response.spots);
+      .then(response => response.spots)
   }
 
   public createSpot(createSpot: CreateSpotCommand) {
@@ -61,8 +61,8 @@ export class SpotRepositoryGql implements SpotRepository {
         description: createSpot.description,
         latitude: createSpot.location.latitude,
         longitude: createSpot.location.longitude,
-        name: createSpot.name
+        name: createSpot.name,
       })
-      .then(response => response.createSpot);
+      .then(response => response.createSpot)
   }
 }

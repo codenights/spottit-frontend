@@ -1,7 +1,7 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro'
 
-import { spacing } from "../../ui/Theme";
+import { spacing } from '../../ui/Theme'
 
 export const Content = styled.div`
-  padding: ${spacing("contentPadding")};
-`;
+  padding: ${spacing('contentPadding')};
+`

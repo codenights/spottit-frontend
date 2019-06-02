@@ -1,15 +1,15 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro'
 
-import { color, spacing } from "../Theme";
+import { color, spacing } from '../Theme'
 
 export const FormGroup = styled.div`
-  margin-bottom: ${spacing("formGroupMargin")};
-`;
+  margin-bottom: ${spacing('formGroupMargin')};
+`
 
 export const Label = styled.label`
   display: block;
-  margin-bottom: ${spacing("labelMargin")};
-`;
+  margin-bottom: ${spacing('labelMargin')};
+`
 
 export const Input = styled.input`
   all: unset;
@@ -17,10 +17,10 @@ export const Input = styled.input`
 
   display: block;
   width: 100%;
-  padding: ${spacing("inputPadding")};
-  border: 1px solid ${color("neutral20")};
+  padding: ${spacing('inputPadding')};
+  border: 1px solid ${color('neutral20')};
   box-sizing: border-box;
-`;
+`
 
 export const Textarea = styled.textarea`
   all: unset;
@@ -28,10 +28,10 @@ export const Textarea = styled.textarea`
 
   display: block;
   width: 100%;
-  padding: ${spacing("inputPadding")};
-  border: 1px solid ${color("neutral20")};
+  padding: ${spacing('inputPadding')};
+  border: 1px solid ${color('neutral20')};
   box-sizing: border-box;
-`;
+`
 
 export const SubmitGroup = styled.div`
   display: flex;
@@ -40,4 +40,4 @@ export const SubmitGroup = styled.div`
   > button:only-child {
     margin-left: auto;
   }
-`;
+`
