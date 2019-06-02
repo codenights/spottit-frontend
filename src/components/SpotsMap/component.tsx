@@ -9,7 +9,7 @@ import { Map } from "../../ui/Map";
 
 import { Wrapper, SpotsList, SpotItem, Pusher } from "./styles";
 import { LoadingAnimation } from "./LoadingAnimation";
-import { useSpots } from "./hooks";
+import { useSpots, useAnimations } from "./hooks";
 
 export interface SpotsMapProps {}
 
@@ -20,6 +20,7 @@ export const SpotsMap: React.FC<SpotsMapProps> = () => {
   const spots = useSpots(center);
   const history = useHistory();
   const listRef = useRef<HTMLUListElement | null>(null);
+  const animations = useAnimations();
 
   useEffect(() => {
     // Set the initial map center
@@ -67,7 +68,7 @@ export const SpotsMap: React.FC<SpotsMapProps> = () => {
           onSelectLocation={onSelectLocation}
         />
       )}
-      <SpotsList ref={listRef}>
+      <SpotsList style={animations.spotsList} ref={listRef}>
         {spots.map(spot => (
           <li key={spot.id}>
             <SpotItem onClick={() => setCenter(spot.location)}>

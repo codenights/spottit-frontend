@@ -1,4 +1,6 @@
 import styled from 'styled-components/macro'
+import { animated } from 'react-spring'
+
 import { color, spacing } from '../../ui/Theme'
 
 export const Wrapper = styled.div`
@@ -9,19 +11,22 @@ export const Wrapper = styled.div`
   .map {
     position: absolute;
     width: 100%;
-    height: 75%;
+    height: 100%;
   }
 `
 
-export const SpotsList = styled.ul`
+export const SpotsList = styled(animated.ul)`
   position: absolute;
+  z-index: 1200;
   bottom: 0;
   width: 100%;
   height: 25%;
   display: flex;
   overflow-x: auto;
   padding: ${spacing('contentPadding')} 0;
+
   scroll-snap-type: x mandatory;
+  background: #fff;
 
   > li {
     flex-shrink: 0;
