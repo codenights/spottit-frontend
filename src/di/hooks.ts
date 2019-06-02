@@ -1,23 +1,23 @@
-import { useContext } from "react";
+import { useContext } from 'react'
 
-import { context } from "./Provider";
-import { DependencyKey, GetDependencyType } from "./types";
+import { context } from './Provider'
+import { DependencyKey, GetDependencyType } from './types'
 
 export const useDependencies = () => {
-  const getContainer = useContext(context);
+  const getContainer = useContext(context)
 
   if (!getContainer) {
-    throw new Error("No DI container in context.");
+    throw new Error('No DI container in context.')
   }
 
-  return getContainer();
-};
+  return getContainer()
+}
 
 export const useDependency = <T extends DependencyKey>(
   dependencyName: T
 ): GetDependencyType<T> => {
-  const container = useDependencies();
-  const dependency = container.resolve<GetDependencyType<T>>(dependencyName);
+  const container = useDependencies()
+  const dependency = container.resolve<GetDependencyType<T>>(dependencyName)
 
-  return dependency;
-};
+  return dependency
+}

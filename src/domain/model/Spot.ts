@@ -1,20 +1,20 @@
-import { Location } from "./Location";
+import { Location } from './Location'
 
 export interface SpotLocation extends Location {
-  address: string | null;
+  address: string | null
 }
 
 export interface Spot {
-  id: string;
-  name: string;
-  description: string | null;
-  location: SpotLocation;
+  id: string
+  name: string
+  description: string | null
+  location: SpotLocation
 }
 
 export interface DetailedSpot extends Spot {
   author: {
-    username: string;
-  };
+    username: string
+  }
 }
 
 export class CreateSpotCommand {

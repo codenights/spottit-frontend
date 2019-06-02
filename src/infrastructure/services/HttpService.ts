@@ -1,21 +1,21 @@
 interface BaseResponse {
-  statusCode: number;
+  statusCode: number
 }
 
 interface SuccessResponse<T> extends BaseResponse {
-  isSuccess: true;
-  data: T;
+  isSuccess: true
+  data: T
 }
 
 interface FailureResponse extends BaseResponse {
-  isSuccess: false;
-  error: Error;
+  isSuccess: false
+  error: Error
 }
 
-export type HttpResponse<T> = SuccessResponse<T> | FailureResponse;
+export type HttpResponse<T> = SuccessResponse<T> | FailureResponse
 
 export interface HttpService {
-  post<T>(path: string, body: any): Promise<HttpResponse<T>>;
+  post<T>(path: string, body: any): Promise<HttpResponse<T>>
 }
 
 export function successResponse<T>(
@@ -25,8 +25,8 @@ export function successResponse<T>(
   return {
     isSuccess: true,
     data,
-    statusCode
-  };
+    statusCode,
+  }
 }
 
 export function failureResponse(
@@ -36,6 +36,6 @@ export function failureResponse(
   return {
     isSuccess: false,
     error,
-    statusCode
-  };
+    statusCode,
+  }
 }

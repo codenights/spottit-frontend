@@ -1,3 +1,3 @@
-import { history } from "../helpers/history";
+import { history } from '../helpers/history'
 
-export const useHistory = () => history;
+export const useHistory = () => history

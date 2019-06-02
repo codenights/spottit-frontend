@@ -1,7 +1,7 @@
 export interface Cache {
-  setItem(key: string, value: string): void;
+  setItem(key: string, value: string): void
 
-  getItem(key: string): string | null;
+  getItem(key: string): string | null
 
-  removeItem(key: string): void;
+  removeItem(key: string): void
 }

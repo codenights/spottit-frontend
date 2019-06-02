@@ -1,36 +1,36 @@
-import { Resolver } from "awilix";
+import { Resolver } from 'awilix'
 
-import { GraphQlService } from "../infrastructure/services/Graphql";
-import { AuthService } from "../infrastructure/services/AuthService";
-import { Cache } from "../infrastructure/services/Cache";
-import { HttpService } from "../infrastructure/services/HttpService";
-import { SpotRepository } from "../domain/repository/SpotRepository";
-import { GetSpot } from "../domain/usecase/GetSpot";
-import { SearchSpots } from "../domain/usecase/SearchSpots";
-import { CreateSpot } from "../domain/usecase/CreateSpot";
+import { GraphQlService } from '../infrastructure/services/Graphql'
+import { AuthService } from '../infrastructure/services/AuthService'
+import { Cache } from '../infrastructure/services/Cache'
+import { HttpService } from '../infrastructure/services/HttpService'
+import { SpotRepository } from '../domain/repository/SpotRepository'
+import { GetSpot } from '../domain/usecase/GetSpot'
+import { SearchSpots } from '../domain/usecase/SearchSpots'
+import { CreateSpot } from '../domain/usecase/CreateSpot'
 
 export interface DiContainer {
   // Configuration
-  apiUrl: Resolver<string>;
+  apiUrl: Resolver<string>
 
   // Services
-  httpService: Resolver<HttpService>;
-  graphqlService: Resolver<GraphQlService>;
-  baseAuthService: Resolver<AuthService>;
-  authService: Resolver<AuthService>;
-  cache: Resolver<Cache>;
+  httpService: Resolver<HttpService>
+  graphqlService: Resolver<GraphQlService>
+  baseAuthService: Resolver<AuthService>
+  authService: Resolver<AuthService>
+  cache: Resolver<Cache>
 
   // Repositories
-  spotRepository: Resolver<SpotRepository>;
+  spotRepository: Resolver<SpotRepository>
 
   // Use case
-  getSpot: Resolver<GetSpot>;
-  searchSpots: Resolver<SearchSpots>;
-  createSpot: Resolver<CreateSpot>;
+  getSpot: Resolver<GetSpot>
+  searchSpots: Resolver<SearchSpots>
+  createSpot: Resolver<CreateSpot>
 }
 
-export type DependencyKey = keyof DiContainer;
+export type DependencyKey = keyof DiContainer
 
 export type GetDependencyType<
   T extends DependencyKey
-> = DiContainer[T] extends Resolver<infer U> ? U : never;
+> = DiContainer[T] extends Resolver<infer U> ? U : never

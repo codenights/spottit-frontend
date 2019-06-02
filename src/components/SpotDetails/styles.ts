@@ -1,12 +1,12 @@
-import styled from "styled-components/macro";
-import ReactMarkdown from "react-markdown";
+import styled from 'styled-components/macro'
+import ReactMarkdown from 'react-markdown'
 
-import { spacing } from "../../ui/Theme";
+import { spacing } from '../../ui/Theme'
 
 export const Header = styled.div`
   position: relative;
-  margin: -${spacing("default")} -${spacing("default")} ${spacing("default")} -${spacing("default")};
-`;
+  margin: -${spacing('default')} -${spacing('default')} ${spacing('default')} -${spacing('default')};
+`
 
 export const SpotInfo = styled.div`
   position: absolute;
@@ -14,7 +14,7 @@ export const SpotInfo = styled.div`
   left: 0;
   right: 0;
   z-index: 1002;
-  padding: ${spacing("default")};
+  padding: ${spacing('default')};
   padding-bottom: 10px;
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
@@ -24,7 +24,7 @@ export const SpotInfo = styled.div`
   }
 
   ::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: -50px;
     left: 0;
@@ -32,11 +32,11 @@ export const SpotInfo = styled.div`
     height: 50px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
   }
-`;
+`
 
 export const Wrapper = styled.div`
-  padding: ${spacing("contentPadding")};
-`;
+  padding: ${spacing('contentPadding')};
+`
 
 export const Markdown = styled(ReactMarkdown)`
   h1 {
@@ -79,12 +79,12 @@ export const Markdown = styled(ReactMarkdown)`
   > * {
     margin-bottom: 10px;
   }
-`;
+`
 
 export const AuthoredBy = styled.p`
-  margin-bottom: ${spacing("default")};
+  margin-bottom: ${spacing('default')};
 
   span {
     font-weight: bold;
   }
-`;
+`

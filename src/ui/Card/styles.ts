@@ -1,11 +1,11 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro'
 
-import { color, spacing } from "../Theme";
+import { color, spacing } from '../Theme'
 
 export const Card = styled.div`
-  padding: ${spacing("contentPadding")};
+  padding: ${spacing('contentPadding')};
   border-radius: 2px;
 
   background: #fff;
-  box-shadow: 0 1px 3px ${color("neutral20")};
-`;
+  box-shadow: 0 1px 3px ${color('neutral20')};
+`

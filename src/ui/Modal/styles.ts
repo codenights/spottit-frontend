@@ -1,4 +1,4 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro'
 
 export const Wrapper = styled.div`
   position: fixed;
@@ -11,4 +11,4 @@ export const Wrapper = styled.div`
 
   background: rgba(0, 0, 0, 0.45);
   overscroll-behavior: none;
-`;
+`

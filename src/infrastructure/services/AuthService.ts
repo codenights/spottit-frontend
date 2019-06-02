@@ -1,20 +1,20 @@
 export interface Tokens {
-  accessToken: string | null;
-  refreshToken: string | null;
+  accessToken: string | null
+  refreshToken: string | null
 }
 
-export type AuthSubscriber = (isLoggedIn: boolean) => void;
+export type AuthSubscriber = (isLoggedIn: boolean) => void
 
 export interface AuthService {
-  login(accessToken: string, refreshToken: string): void;
+  login(accessToken: string, refreshToken: string): void
 
-  logout(): void;
+  logout(): void
 
-  getTokens(): Tokens;
+  getTokens(): Tokens
 
-  isLoggedIn(): boolean;
+  isLoggedIn(): boolean
 
-  subscribe(subscriber: AuthSubscriber): () => void;
+  subscribe(subscriber: AuthSubscriber): () => void
 
-  refreshTokens(): Promise<void>;
+  refreshTokens(): Promise<void>
 }
