@@ -21,6 +21,11 @@ export const SpotInfo = styled(animated.div)`
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
 
+  > * {
+    max-width: 600px;
+    margin: auto;
+  }
+
   > :nth-child(2) {
     font-size: 1.2rem;
   }
@@ -38,6 +43,11 @@ export const SpotInfo = styled(animated.div)`
 
 export const Wrapper = styled.div`
   padding: ${spacing('contentPadding')};
+`
+
+export const Body = styled(animated.div)`
+  max-width: 600px;
+  margin: auto;
 `
 
 export const Markdown = styled(ReactMarkdown)`

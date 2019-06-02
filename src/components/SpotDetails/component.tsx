@@ -1,17 +1,17 @@
-import React from "react";
-import { animated } from "react-spring";
+import React from 'react'
+import { animated } from 'react-spring'
 
-import { DetailedSpot } from "../../domain/model/Spot";
-import { Map } from "../../ui/Map";
-import { AuthoredBy, Wrapper, Markdown, Header, SpotInfo } from "./styles";
-import { useAnimations } from "./hooks";
+import { DetailedSpot } from '../../domain/model/Spot'
+import { Map } from '../../ui/Map'
+import { AuthoredBy, Wrapper, Markdown, Header, SpotInfo, Body } from './styles'
+import { useAnimations } from './hooks'
 
 export interface SpotDetailsProps {
-  spot: DetailedSpot;
+  spot: DetailedSpot
 }
 
 export const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
-  const animations = useAnimations();
+  const animations = useAnimations()
 
   return (
     <Wrapper>
@@ -21,7 +21,7 @@ export const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
             isFixed={true}
             center={spot.location}
             zoomLevel={17}
-            style={{ height: "250px" }}
+            style={{ height: '250px' }}
           />
         </animated.div>
         <SpotInfo style={animations.header}>
@@ -30,12 +30,12 @@ export const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
         </SpotInfo>
       </Header>
 
-      <animated.div style={animations.description}>
+      <Body style={animations.description}>
         <AuthoredBy>
           Added by <span>{spot.author.username}</span>
         </AuthoredBy>
         {spot.description && <Markdown source={spot.description} />}
-      </animated.div>
+      </Body>
     </Wrapper>
-  );
-};
+  )
+}
