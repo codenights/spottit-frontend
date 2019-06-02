@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { stringify } from "querystring";
 
 import { Location } from "../../domain/model/Location";
@@ -7,7 +7,7 @@ import { useLocation } from "../../hooks/useLocation";
 import { useHistory } from "../../hooks/useHistory";
 import { Map } from "../../ui/Map";
 
-import { Wrapper } from "./styles";
+import { Wrapper, SpotsList, SpotItem, Pusher } from "./styles";
 import { useSpots } from "./hooks";
 
 export interface SpotsMapProps {}
@@ -18,6 +18,7 @@ export const SpotsMap: React.FC<SpotsMapProps> = () => {
   const location = useLocation();
   const spots = useSpots(center);
   const history = useHistory();
+  const listRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
     // Set the initial map center
@@ -27,6 +28,14 @@ export const SpotsMap: React.FC<SpotsMapProps> = () => {
 
     setCenter(location);
   }, [location, center]);
+
+  useEffect(() => {
+    if (!listRef.current) {
+      return;
+    }
+
+    listRef.current.scrollLeft = 0;
+  }, [spots]);
 
   const onSelectLocation = (location: Location) => {
     const params = stringify({
@@ -57,6 +66,17 @@ export const SpotsMap: React.FC<SpotsMapProps> = () => {
           onSelectLocation={onSelectLocation}
         />
       )}
+      <SpotsList ref={listRef}>
+        {spots.map(spot => (
+          <li key={spot.id}>
+            <SpotItem onClick={() => setCenter(spot.location)}>
+              <p>{spot.name}</p>
+              <p>{spot.location.address}</p>
+            </SpotItem>
+          </li>
+        ))}
+        <Pusher />
+      </SpotsList>
     </Wrapper>
   );
 };
