@@ -1,5 +1,5 @@
 import { SpotRepository } from "../repository/SpotRepository";
-import { Spot } from "../model/Spot";
+import { DetailedSpot } from "../model/Spot";
 
 interface Dependencies {
   spotRepository: SpotRepository;
@@ -12,7 +12,7 @@ export class GetSpot {
     this.spotRepository = spotRepository;
   }
 
-  public execute(id: string): Promise<Spot> {
+  public execute(id: string): Promise<DetailedSpot> {
     return this.spotRepository.getSpot(id);
   }
 }

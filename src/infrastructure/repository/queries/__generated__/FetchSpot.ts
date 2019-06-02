@@ -13,12 +13,18 @@ export interface FetchSpot_spot_location {
   address: string | null;
 }
 
+export interface FetchSpot_spot_author {
+  __typename: "User";
+  username: string;
+}
+
 export interface FetchSpot_spot {
   __typename: "Spot";
   id: string;
   name: string;
   description: string | null;
   location: FetchSpot_spot_location;
+  author: FetchSpot_spot_author;
 }
 
 export interface FetchSpot {

@@ -1,7 +1,7 @@
 import { loader } from "graphql.macro";
 
 import { SpotRepository } from "../../domain/repository/SpotRepository";
-import { Spot, CreateSpotCommand } from "../../domain/model/Spot";
+import { Spot, CreateSpotCommand, DetailedSpot } from "../../domain/model/Spot";
 import { Location } from "../../domain/model/Location";
 import { GraphQlService } from "../services/Graphql";
 import {
@@ -34,7 +34,7 @@ export class SpotRepositoryGql implements SpotRepository {
     this.graphql = graphqlService;
   }
 
-  public getSpot(id: string): Promise<Spot> {
+  public getSpot(id: string): Promise<DetailedSpot> {
     return this.graphql
       .query<FetchSpotVariables, FetchSpot>(queries.SPOT, {
         id

@@ -8,7 +8,7 @@ export const Header = styled.div`
   margin: -${spacing("default")} -${spacing("default")} ${spacing("default")} -${spacing("default")};
 `;
 
-export const SpotInfo = styled.p`
+export const SpotInfo = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -78,5 +78,13 @@ export const Markdown = styled(ReactMarkdown)`
 
   > * {
     margin-bottom: 10px;
+  }
+`;
+
+export const AuthoredBy = styled.p`
+  margin-bottom: ${spacing("default")};
+
+  span {
+    font-weight: bold;
   }
 `;
