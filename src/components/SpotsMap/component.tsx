@@ -18,7 +18,7 @@ export const SpotsMap: React.FC<SpotsMapProps> = () => {
   const location = useLocation();
   const spots = useSpots(center);
   const history = useHistory();
-  const listRef = useRef<any>(null);
+  const listRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
     // Set the initial map center
@@ -30,7 +30,11 @@ export const SpotsMap: React.FC<SpotsMapProps> = () => {
   }, [location, center]);
 
   useEffect(() => {
-    (listRef.current as HTMLElement).scrollLeft = 0;
+    if (!listRef.current) {
+      return;
+    }
+
+    listRef.current.scrollLeft = 0;
   }, [spots]);
 
   const onSelectLocation = (location: Location) => {
