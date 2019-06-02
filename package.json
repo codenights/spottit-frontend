@@ -42,8 +42,7 @@
     "react-scripts": "3.0.0",
     "react-spring": "^8.0.20",
     "reset.css": "^2.0.2",
-    "styled-components": "^4.2.0",
-    "typescript": "3.4.5"
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "@types/history": "^4.7.2",
@@ -51,6 +50,7 @@
     "@types/react-leaflet": "^2.2.1",
     "@types/react-router-dom": "^4.3.2",
     "@types/styled-components": "^4.1.10",
-    "apollo": "^2.11.0"
+    "apollo": "^2.11.0",
+    "typescript": "3.3.3333"
   }
 }
