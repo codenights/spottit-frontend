@@ -1,1 +1,1 @@
-export * from './component'
+export { SpotsMap as default } from './component'

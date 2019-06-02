@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { Route } from 'react-router-dom'
 import { stringify } from 'querystring'
 
 import { Location } from '../../domain/model/Location'
 
 import { useLocation } from '../../hooks/useLocation'
 import { useHistory } from '../../hooks/useHistory'
-import { Map } from '../../ui/Map'
 
-import { Wrapper, SpotsList, SpotItem } from './styles'
 import { LoadingAnimation } from './LoadingAnimation'
 import { useSpots, useAnimations } from './hooks'
+import {
+  Wrapper,
+  SpotsList,
+  SpotItem,
+  SpotDetailsContainer,
+  Map,
+} from './styles'
+
+const SpotDetailsRouter = React.lazy(() => import('../SpotDetails'))
 
 export interface SpotsMapProps {}
 
@@ -53,31 +61,42 @@ export const SpotsMap: React.FC<SpotsMapProps> = () => {
       {!location || !center ? (
         <LoadingAnimation />
       ) : (
-        <Map
-          isFixed={false}
-          zoomLevel={zoomLevel}
-          onZoomLevelChange={setZoomLevel}
-          center={center}
-          onCenterChange={setCenter}
-          markers={spots.map(spot => ({
-            id: spot.id,
-            position: spot.location,
-            onClick: () => history.push(`/s/${spot.id}`),
-          }))}
-          currentPosition={location}
-          onSelectLocation={onSelectLocation}
-        />
+        <>
+          <Map
+            isFixed={false}
+            zoomLevel={zoomLevel}
+            onZoomLevelChange={setZoomLevel}
+            center={center}
+            onCenterChange={setCenter}
+            markers={spots.map(spot => ({
+              id: spot.id,
+              position: spot.location,
+              onClick: () => history.push(`/s/${spot.id}`),
+            }))}
+            currentPosition={location}
+            onSelectLocation={onSelectLocation}
+          />
+          <SpotsList style={animations.spotsList} ref={listRef}>
+            {spots.map(spot => (
+              <li key={spot.id}>
+                <SpotItem onClick={() => setCenter(spot.location)}>
+                  <p>{spot.name}</p>
+                  <p>{spot.location.address}</p>
+                </SpotItem>
+              </li>
+            ))}
+          </SpotsList>
+        </>
       )}
-      <SpotsList style={animations.spotsList} ref={listRef}>
-        {spots.map(spot => (
-          <li key={spot.id}>
-            <SpotItem onClick={() => setCenter(spot.location)}>
-              <p>{spot.name}</p>
-              <p>{spot.location.address}</p>
-            </SpotItem>
-          </li>
-        ))}
-      </SpotsList>
+
+      <Route
+        path="/s/:spotId"
+        render={props => (
+          <SpotDetailsContainer>
+            <SpotDetailsRouter {...props} />
+          </SpotDetailsContainer>
+        )}
+      />
     </Wrapper>
   )
 }

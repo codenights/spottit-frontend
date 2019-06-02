@@ -2,22 +2,23 @@ import styled from 'styled-components/macro'
 import { animated } from 'react-spring'
 
 import { color, spacing } from '../../ui/Theme'
+import { Map as BaseMap } from '../../ui/Map'
 
 export const Wrapper = styled.div`
   flex: 1;
   position: relative;
   overflow: hidden;
+`
 
-  .map {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
+export const Map = styled(BaseMap)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
 `
 
 export const SpotsList = styled(animated.ul)`
   position: absolute;
-  z-index: 1200;
+  z-index: 1100;
   bottom: 0;
   right: 0;
   left: 0;
@@ -52,6 +53,7 @@ export const SpotsList = styled(animated.ul)`
 
 export const SpotItem = styled.div`
   padding: 20px;
+  cursor: pointer;
 
   > :first-child {
     font-weight: bold;
@@ -62,4 +64,15 @@ export const SpotItem = styled.div`
   > :nth-child(2) {
     color: ${color('neutral60')};
   }
+`
+
+export const SpotDetailsContainer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  z-index: 1200;
+  background: #fff;
 `

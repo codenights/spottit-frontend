@@ -6,7 +6,6 @@ import { spacing } from '../../ui/Theme'
 
 export const Header = styled.div`
   position: relative;
-  overflow: hidden;
   margin: -${spacing('default')} -${spacing('default')} ${spacing('default')} -${spacing('default')};
 `
 
