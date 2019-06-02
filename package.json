@@ -1,7 +1,27 @@
 {
-  "name": "spottit-front",
+  "name": "spottit-frontend",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .ts . --fix",
+    "gen-gql": "apollo client:download-schema && yarn apollo client:codegen --target=typescript"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@types/jest": "24.0.12",
     "@types/node": "11.13.8",
@@ -23,29 +43,6 @@
     "reset.css": "^2.0.2",
     "styled-components": "^4.2.0",
     "typescript": "3.4.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext .ts . --fix",
-    "gen-gql": "apollo client:download-schema && yarn apollo client:codegen --target=typescript"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "@types/history": "^4.7.2",

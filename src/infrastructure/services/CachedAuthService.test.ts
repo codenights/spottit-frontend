@@ -158,7 +158,7 @@ describe("CachedAuthService", () => {
     });
 
     // When
-    const result = await cachedAuthService.refreshTokens();
+    await cachedAuthService.refreshTokens();
 
     // Then
     expect(cache.setItem).toHaveBeenCalledTimes(1);
