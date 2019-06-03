@@ -1,9 +1,9 @@
 import { CreateSpot } from './CreateSpot'
 import { SpotRepository } from '../repository/SpotRepository'
-import { Spot, CreateSpotCommand } from '../model/Spot'
+import { Spot } from '../model/Spot'
 import { Location } from '../model/Location'
 
-const createSpot = (createSpotCommand: CreateSpotCommand): Spot => ({
+const createSpot = (): Spot => ({
   id: 'spot-id',
   location: {
     address: 'address',
@@ -34,9 +34,7 @@ describe('GetSpot', () => {
       latitude: 1,
       longitude: 1,
     }
-    ;(repository.createSpot as jest.Mock).mockResolvedValue(
-      createSpot(new CreateSpotCommand(name, location))
-    )
+    ;(repository.createSpot as jest.Mock).mockResolvedValue(createSpot())
 
     // When
     const result: any = await useCase.execute(name, location)
@@ -44,7 +42,7 @@ describe('GetSpot', () => {
     // Then
     expect(repository.createSpot).toHaveBeenCalledTimes(1)
     expect(repository.createSpot).toHaveBeenCalledWith({ name, location })
-    expect(result.data).toEqual(createSpot({ name, location }))
+    expect(result.data).toEqual(createSpot())
     expect(result.success).toEqual(true)
   })
 
@@ -56,9 +54,7 @@ describe('GetSpot', () => {
       longitude: 1,
     }
     const description = 'spot description'
-    ;(repository.createSpot as jest.Mock).mockResolvedValue(
-      createSpot(new CreateSpotCommand(name, location, description))
-    )
+    ;(repository.createSpot as jest.Mock).mockResolvedValue(createSpot())
 
     // When
     const result: any = await useCase.execute(name, location, description)
@@ -70,7 +66,7 @@ describe('GetSpot', () => {
       location,
       description,
     })
-    expect(result.data).toEqual(createSpot({ name, location, description }))
+    expect(result.data).toEqual(createSpot())
     expect(result.success).toEqual(true)
   })
 
