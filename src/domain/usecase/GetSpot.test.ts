@@ -21,6 +21,7 @@ describe('GetSpot', () => {
     repository = {
       getSpot: jest.fn(),
       getSpotsByLocation: jest.fn(),
+      createSpot: jest.fn(),
     }
     useCase = new GetSpot({ spotRepository: repository })
   })
