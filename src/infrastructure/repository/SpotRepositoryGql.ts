@@ -61,7 +61,7 @@ export class SpotRepositoryGql implements SpotRepository {
       .then(response => response.spots)
   }
 
-  public createSpot(createSpot: CreateSpotCommand) {
+  public createSpot(createSpot: CreateSpotCommand): Promise<void> {
     return this.graphql
       .mutate<CreateSpotVariables, CreateSpot>(queries.CREATE_SPOT, {
         description: createSpot.description,
@@ -69,6 +69,6 @@ export class SpotRepositoryGql implements SpotRepository {
         longitude: createSpot.location.longitude,
         name: createSpot.name,
       })
-      .then(response => response.createSpot)
+      .then(() => undefined)
   }
 }

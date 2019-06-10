@@ -29,6 +29,6 @@ export class CommentRepositoryGql implements CommentRepository {
         body: createComment.body,
         spotId: createComment.spotId,
       })
-      .then(() => null as any)
+      .then(() => undefined)
   }
 }
