@@ -24,7 +24,7 @@ export class AddComment {
     const createCommentCommand = new CreateComment(spotId, body)
 
     return this.commentRepository
-      .addComment(createCommentCommand)
+      .createComment(createCommentCommand)
       .then(createUseCaseSuccess)
       .catch(createUseCaseFailure)
   }

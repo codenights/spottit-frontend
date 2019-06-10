@@ -1,5 +1,5 @@
 import { CreateComment } from '../model/Comment'
 
 export interface CommentRepository {
-  addComment(createComment: CreateComment): Promise<void>
+  createComment(createComment: CreateComment): Promise<void>
 }

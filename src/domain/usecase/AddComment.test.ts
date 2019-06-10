@@ -7,7 +7,7 @@ describe('AddComment', () => {
 
   beforeEach(() => {
     repository = {
-      addComment: jest.fn(),
+      createComment: jest.fn(),
     }
     useCase = new AddComment({ commentRepository: repository })
   })
@@ -16,21 +16,21 @@ describe('AddComment', () => {
     // Given
     const spotId = 'spot-1'
     const body = 'comment body'
-    ;(repository.addComment as jest.Mock).mockResolvedValue(null)
+    ;(repository.createComment as jest.Mock).mockResolvedValue(null)
 
     // When
     const result: any = await useCase.execute(spotId, body)
 
     // Then
-    expect(repository.addComment).toHaveBeenCalledTimes(1)
-    expect(repository.addComment).toHaveBeenCalledWith({ spotId, body })
+    expect(repository.createComment).toHaveBeenCalledTimes(1)
+    expect(repository.createComment).toHaveBeenCalledWith({ spotId, body })
     expect(result.data).toEqual(null)
     expect(result.success).toEqual(true)
   })
 
   it('execute: should return a failure if an error is thrown', async () => {
     // Given
-    ;(repository.addComment as jest.Mock).mockRejectedValue(
+    ;(repository.createComment as jest.Mock).mockRejectedValue(
       new Error('Test error')
     )
 

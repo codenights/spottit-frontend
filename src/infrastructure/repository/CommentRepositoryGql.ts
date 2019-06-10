@@ -23,7 +23,7 @@ export class CommentRepositoryGql implements CommentRepository {
     this.graphql = graphqlService
   }
 
-  public addComment(createComment: CreateComment): Promise<void> {
+  public createComment(createComment: CreateComment): Promise<void> {
     return this.graphql
       .mutate<AddCommentVariables, AddComment>(queries.ADD_COMMENT, {
         body: createComment.body,

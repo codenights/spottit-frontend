@@ -23,7 +23,7 @@ describe('CommentRepositoryGql', () => {
     ;(graphqlService.mutate as jest.Mock).mockResolvedValue(null)
 
     // When
-    await repository.addComment(createCommentCommand)
+    await repository.createComment(createCommentCommand)
 
     // Then
     expect(graphqlService.mutate).toHaveBeenCalledTimes(1)
