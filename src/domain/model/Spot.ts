@@ -22,6 +22,7 @@ export interface DetailedSpot extends Spot {
       username: string
     }
     body: string
+    createdAt: Date
   }>
 }
 

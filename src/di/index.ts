@@ -5,12 +5,12 @@ import { SearchSpots } from '../domain/usecase/SearchSpots'
 import { CreateSpot } from '../domain/usecase/CreateSpot'
 import { AddComment } from '../domain/usecase/AddComment'
 import { SpotRepositoryGql } from '../infrastructure/repository/SpotRepositoryGql'
+import { CommentRepositoryGql } from '../infrastructure/repository/CommentRepositoryGql'
 import { CacheLocalStorage } from '../infrastructure/services/CacheLocalStorage'
 import { GraphQlApolloService } from '../infrastructure/services/GraphqlApollo'
 import { BaseAuthService } from '../infrastructure/services/BaseAuthService'
 import { CachedAuthService } from '../infrastructure/services/CachedAuthService'
 import { FetchHttpService } from '../infrastructure/services/FetchHttpService'
-import { CommentRepositoryGql } from '../infrastructure/repository/CommentRepository'
 
 import { DiContainer } from './types'
 

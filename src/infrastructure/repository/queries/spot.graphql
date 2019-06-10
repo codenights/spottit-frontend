@@ -18,6 +18,7 @@ query FetchSpot($id: String!) {
         username
       }
       body
+      createdAt
     }
   }
 }

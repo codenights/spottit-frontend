@@ -29,6 +29,7 @@ export interface FetchSpot_spot_comments {
   id: string;
   author: FetchSpot_spot_comments_author;
   body: string;
+  createdAt: string;
 }
 
 export interface FetchSpot_spot {

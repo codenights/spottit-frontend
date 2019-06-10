@@ -39,7 +39,13 @@ export class SpotRepositoryGql implements SpotRepository {
       .query<FetchSpotVariables, FetchSpot>(queries.SPOT, {
         id,
       })
-      .then(response => response.spot)
+      .then(response => ({
+        ...response.spot,
+        comments: response.spot.comments.map(comment => ({
+          ...comment,
+          createdAt: new Date(Date.parse(comment.createdAt)),
+        })),
+      }))
   }
 
   public getSpotsByLocation(

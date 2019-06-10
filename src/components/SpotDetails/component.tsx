@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { format } from 'date-fns'
 
 import { Map } from '../../ui/Map'
 import { Markdown } from '../../ui/Markdown'
@@ -54,7 +55,10 @@ export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
         {spot.comments.map(comment => (
           <li key={comment.id}>
             <Comment>
-              <CommentHeader>{comment.author.username} wrote:</CommentHeader>
+              <CommentHeader>
+                {comment.author.username} wrote on{' '}
+                {format(comment.createdAt.toString(), 'DD/MM/YYYY')}
+              </CommentHeader>
               <Markdown>{comment.body}</Markdown>
             </Comment>
           </li>
