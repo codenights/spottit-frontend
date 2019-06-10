@@ -187,7 +187,9 @@ describe('SpotRepositoryGql', () => {
       { latitude: 0.1, longitude: 1.0 },
       'spot-description'
     )
-    ;(graphqlService.mutate as jest.Mock).mockResolvedValue(null)
+    ;(graphqlService.mutate as jest.Mock).mockResolvedValue({
+      createSpot: null,
+    })
 
     // When
     await repository.createSpot(createSpotCommand)
