@@ -4,7 +4,7 @@ import { AuthService } from './AuthService'
 import { GraphQlService } from './Graphql'
 
 interface Dependencies {
-  apiUrl: string
+  apollo: ApolloClient<any>
   authService: AuthService
 }
 
@@ -12,11 +12,9 @@ export class GraphQlApolloService implements GraphQlService {
   private client: ApolloClient<any>
   private authService: AuthService
 
-  public constructor({ apiUrl, authService }: Dependencies) {
+  public constructor({ apollo, authService }: Dependencies) {
     this.authService = authService
-    this.client = new ApolloClient({
-      uri: `${apiUrl}/graphql`,
-    })
+    this.client = apollo
   }
 
   public query<Variables extends {}, Response>(
@@ -26,7 +24,6 @@ export class GraphQlApolloService implements GraphQlService {
     return this.retryIfNeeded(() =>
       this.client
         .query<Response, Variables>({
-          fetchPolicy: 'no-cache',
           query,
           variables,
           context: {
@@ -42,13 +39,15 @@ export class GraphQlApolloService implements GraphQlService {
     variables: Variables
   ): Promise<Response> {
     return this.retryIfNeeded(() =>
-      this.client.mutate<Response, Variables>({
-        mutation,
-        variables,
-        context: {
-          headers: this.getHeaders(),
-        },
-      })
+      this.client
+        .mutate<Response, Variables>({
+          mutation,
+          variables,
+          context: {
+            headers: this.getHeaders(),
+          },
+        })
+        .then(response => response.data)
     )
   }
 

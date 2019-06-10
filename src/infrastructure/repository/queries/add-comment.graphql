@@ -1,5 +1,14 @@
 mutation AddComment($spotId: String!, $body: String!) {
   addComment(input: { spotId: $spotId, body: $body }) {
     id
+    author {
+      id
+      username
+    }
+    spot {
+      id
+    }
+    body
+    createdAt
   }
 }

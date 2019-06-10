@@ -1,4 +1,5 @@
-import { createContainer, asClass, asValue } from 'awilix'
+import { createContainer, asClass, asValue, asFunction } from 'awilix'
+import ApolloClient from 'apollo-boost'
 
 import { GetSpot } from '../domain/usecase/GetSpot'
 import { SearchSpots } from '../domain/usecase/SearchSpots'
@@ -13,6 +14,8 @@ import { CachedAuthService } from '../infrastructure/services/CachedAuthService'
 import { FetchHttpService } from '../infrastructure/services/FetchHttpService'
 
 import { DiContainer } from './types'
+import { EventDispatcher } from '../domain/events/Dispatcher'
+import { OnCommentAdded } from '../infrastructure/events/OnCommentAdded'
 
 const apiUrl = process.env.REACT_APP_API_URL
 
@@ -24,9 +27,18 @@ if (!apiUrl) {
 
 export const container = createContainer()
 
+const apollo = new ApolloClient({
+  uri: `${apiUrl}/graphql`,
+})
+
 const dependencies: DiContainer = {
   // Configuration
   apiUrl: asValue(apiUrl),
+  apollo: asValue(apollo),
+
+  // Events
+  eventDispatcher: asClass(EventDispatcher).singleton(),
+  onCommentAdded: asFunction(OnCommentAdded).singleton(),
 
   // Services
   httpService: asClass(FetchHttpService).singleton(),
