@@ -50,6 +50,6 @@
     "@types/react-leaflet": "^2.2.1",
     "@types/react-router-dom": "^4.3.2",
     "@types/styled-components": "^4.1.14",
-    "apollo": "2.12.5"
+    "apollo": "2.13.0"
   }
 }
