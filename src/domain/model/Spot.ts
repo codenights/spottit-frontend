@@ -15,6 +15,15 @@ export interface DetailedSpot extends Spot {
   author: {
     username: string
   }
+  comments: Array<{
+    id: string
+    author: {
+      id: string
+      username: string
+    }
+    body: string
+    createdAt: Date
+  }>
 }
 
 export class CreateSpotCommand {

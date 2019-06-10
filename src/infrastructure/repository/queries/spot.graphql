@@ -11,5 +11,14 @@ query FetchSpot($id: String!) {
     author {
       username
     }
+    comments {
+      id
+      author {
+        id
+        username
+      }
+      body
+      createdAt
+    }
   }
 }

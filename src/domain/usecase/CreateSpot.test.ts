@@ -14,7 +14,7 @@ const createSpot = (): Spot => ({
   description: 'spot description',
 })
 
-describe('GetSpot', () => {
+describe('CreateSpot', () => {
   let repository: SpotRepository
   let useCase: CreateSpot
 

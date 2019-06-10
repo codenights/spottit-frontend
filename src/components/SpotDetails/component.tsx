@@ -1,28 +1,39 @@
-import React from "react";
+import React from 'react'
+import { format } from 'date-fns'
 
-import { Map } from "../../ui/Map";
-import { useSpot } from "./hooks";
-import { AuthoredBy, Wrapper, Markdown, Header, SpotInfo } from "./styles";
+import { Map } from '../../ui/Map'
+import { Markdown } from '../../ui/Markdown'
+import { usePresenter } from './hooks'
+import {
+  AuthoredBy,
+  Body,
+  Header,
+  SpotInfo,
+  Comments,
+  Comment,
+  CommentHeader,
+} from './styles'
+import { AddComment } from './AddComment'
 
 export interface SpotDetailsProps {
-  spotId: string;
+  spotId: string
 }
 
 export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
-  const spot = useSpot(spotId);
+  const { spot, ...presenter } = usePresenter(spotId)
 
   if (!spot) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
-    <Wrapper>
+    <main>
       <Header>
         <Map
           isFixed={true}
           center={spot.location}
           zoomLevel={17}
-          style={{ height: "250px" }}
+          style={{ height: '250px' }}
         />
         <SpotInfo>
           <p>{spot.name}</p>
@@ -30,10 +41,30 @@ export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
         </SpotInfo>
       </Header>
 
-      <AuthoredBy>
-        Added by <span>{spot.author.username}</span>
-      </AuthoredBy>
-      {spot.description && <Markdown source={spot.description} />}
-    </Wrapper>
-  );
-};
+      <Body>
+        <AuthoredBy>
+          Added by <span>{spot.author.username}</span>
+        </AuthoredBy>
+        {spot.description && <Markdown>{spot.description}</Markdown>}
+      </Body>
+
+      <Comments>
+        {spot.comments.map(comment => (
+          <li key={comment.id}>
+            <Comment>
+              <CommentHeader>
+                {comment.author.username} wrote on{' '}
+                {format(comment.createdAt.toString(), 'DD/MM/YYYY')}
+              </CommentHeader>
+              <Markdown>{comment.body}</Markdown>
+            </Comment>
+          </li>
+        ))}
+      </Comments>
+
+      {presenter.showAddComment && (
+        <AddComment onSave={presenter.createComment} />
+      )}
+    </main>
+  )
+}

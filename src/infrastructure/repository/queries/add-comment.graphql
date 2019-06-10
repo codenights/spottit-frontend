@@ -1,0 +1,5 @@
+mutation AddComment($spotId: String!, $body: String!) {
+  addComment(input: { spotId: $spotId, body: $body }) {
+    id
+  }
+}

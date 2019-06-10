@@ -39,7 +39,13 @@ export class SpotRepositoryGql implements SpotRepository {
       .query<FetchSpotVariables, FetchSpot>(queries.SPOT, {
         id,
       })
-      .then(response => response.spot)
+      .then(response => ({
+        ...response.spot,
+        comments: response.spot.comments.map(comment => ({
+          ...comment,
+          createdAt: new Date(Date.parse(comment.createdAt)),
+        })),
+      }))
   }
 
   public getSpotsByLocation(
@@ -55,7 +61,7 @@ export class SpotRepositoryGql implements SpotRepository {
       .then(response => response.spots)
   }
 
-  public createSpot(createSpot: CreateSpotCommand) {
+  public createSpot(createSpot: CreateSpotCommand): Promise<Spot> {
     return this.graphql
       .mutate<CreateSpotVariables, CreateSpot>(queries.CREATE_SPOT, {
         description: createSpot.description,

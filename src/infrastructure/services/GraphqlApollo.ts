@@ -26,6 +26,7 @@ export class GraphQlApolloService implements GraphQlService {
     return this.retryIfNeeded(() =>
       this.client
         .query<Response, Variables>({
+          fetchPolicy: 'no-cache',
           query,
           variables,
           context: {

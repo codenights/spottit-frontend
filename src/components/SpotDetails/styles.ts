@@ -1,11 +1,9 @@
 import styled from 'styled-components/macro'
-import ReactMarkdown from 'react-markdown'
 
-import { spacing } from '../../ui/Theme'
+import { spacing, color } from '../../ui/Theme'
 
 export const Header = styled.div`
   position: relative;
-  margin: -${spacing('default')} -${spacing('default')} ${spacing('default')} -${spacing('default')};
 `
 
 export const SpotInfo = styled.div`
@@ -34,51 +32,9 @@ export const SpotInfo = styled.div`
   }
 `
 
-export const Wrapper = styled.div`
+export const Body = styled.div`
   padding: ${spacing('contentPadding')};
-`
-
-export const Markdown = styled(ReactMarkdown)`
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  h3 {
-    font-size: 1.8rem;
-  }
-
-  h4 {
-    font-size: 1.6rem;
-  }
-
-  h5 {
-    font-weight: bold;
-  }
-
-  h6 {
-    font-style: italic;
-  }
-
-  ol,
-  ul {
-    list-style-position: inside;
-  }
-
-  ul {
-    list-style-type: disc;
-  }
-
-  ol {
-    list-style-type: decimal;
-  }
-
-  > * {
-    margin-bottom: 10px;
-  }
+  background: #fff;
 `
 
 export const AuthoredBy = styled.p`
@@ -87,4 +43,24 @@ export const AuthoredBy = styled.p`
   span {
     font-weight: bold;
   }
+`
+
+export const Comments = styled.ul`
+  margin-top: ${spacing('default')};
+  padding: ${spacing('contentPadding')};
+  background: #fff;
+
+  > li + li {
+    margin-top: ${spacing('default')};
+    padding-top: ${spacing('default')};
+    border-top: 1px solid ${color('neutral10')};
+  }
+`
+
+export const Comment = styled.div``
+
+export const CommentHeader = styled.p`
+  margin-bottom: 10px;
+  color: ${color('neutral50')};
+  font-style: italic;
 `
