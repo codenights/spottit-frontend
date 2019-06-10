@@ -1,8 +1,8 @@
-import React from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components/macro";
+import React from 'react'
+import { createGlobalStyle, ThemeProvider } from 'styled-components/macro'
 
-import { theme } from "./theme";
-import { fontSize, color } from "./utils";
+import { theme } from './theme'
+import { fontSize, color } from './utils'
 
 export interface ThemeProps {}
 
@@ -13,7 +13,7 @@ export const Theme: React.FC<ThemeProps> = ({ children }) => (
       {children}
     </>
   </ThemeProvider>
-);
+)
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -25,10 +25,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-size: ${fontSize("base")};
+    font-size: ${fontSize('base')};
     line-height: 1.25;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: ${color("neutral80")}
+    background: #f4f4f4;
+    color: ${color('neutral80')};
   }
 
   #root {
@@ -36,4 +37,4 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     min-height: 100vh;
   }
-`;
+`

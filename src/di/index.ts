@@ -3,14 +3,16 @@ import { createContainer, asClass, asValue } from 'awilix'
 import { GetSpot } from '../domain/usecase/GetSpot'
 import { SearchSpots } from '../domain/usecase/SearchSpots'
 import { CreateSpot } from '../domain/usecase/CreateSpot'
+import { AddComment } from '../domain/usecase/AddComment'
 import { SpotRepositoryGql } from '../infrastructure/repository/SpotRepositoryGql'
 import { CacheLocalStorage } from '../infrastructure/services/CacheLocalStorage'
 import { GraphQlApolloService } from '../infrastructure/services/GraphqlApollo'
 import { BaseAuthService } from '../infrastructure/services/BaseAuthService'
 import { CachedAuthService } from '../infrastructure/services/CachedAuthService'
+import { FetchHttpService } from '../infrastructure/services/FetchHttpService'
+import { CommentRepositoryGql } from '../infrastructure/repository/CommentRepository'
 
 import { DiContainer } from './types'
-import { FetchHttpService } from '../infrastructure/services/FetchHttpService'
 
 const apiUrl = process.env.REACT_APP_API_URL
 
@@ -35,11 +37,13 @@ const dependencies: DiContainer = {
 
   // Repositories
   spotRepository: asClass(SpotRepositoryGql).singleton(),
+  commentRepository: asClass(CommentRepositoryGql).singleton(),
 
-  // Use case
+  // Use cases
   getSpot: asClass(GetSpot).singleton(),
   searchSpots: asClass(SearchSpots).singleton(),
   createSpot: asClass(CreateSpot).singleton(),
+  addComment: asClass(AddComment).singleton(),
 }
 
 container.register(dependencies as any)
