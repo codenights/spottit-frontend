@@ -11,6 +11,7 @@ export const Wrapper = styled.form`
     width: 100%;
     padding: ${spacing('inputPadding')};
     font-size: inherit;
+    font-family: inherit;
   }
 
   button {
