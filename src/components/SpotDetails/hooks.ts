@@ -5,7 +5,7 @@ import { useDependency } from '../../di'
 
 export const useSpot = (
   id: string
-): [DetailedSpot | null, (body: string) => void] => {
+): [DetailedSpot | null, (body: string) => Promise<void>] => {
   const [spot, setSpot] = useState<DetailedSpot | null>(null)
   const getSpot = useDependency('getSpot')
   const addComment = useDependency('addComment')
@@ -14,12 +14,12 @@ export const useSpot = (
     getSpot.execute(id).then(setSpot)
   }, [id, getSpot])
 
-  const createComment = (body: string) => {
+  const createComment = (body: string): Promise<void> => {
     if (!spot) {
-      return
+      return Promise.resolve()
     }
 
-    addComment
+    return addComment
       .execute(spot.id, body)
       .then(() => getSpot.execute(id).then(setSpot))
   }

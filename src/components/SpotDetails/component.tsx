@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { format } from 'date-fns'
 
 import { Map } from '../../ui/Map'
@@ -12,10 +12,8 @@ import {
   Comments,
   Comment,
   CommentHeader,
-  AddComment,
-  ButtonWrapper,
 } from './styles'
-import { Button } from '../../ui/Button'
+import { AddComment } from './AddComment'
 
 export interface SpotDetailsProps {
   spotId: string
@@ -23,7 +21,6 @@ export interface SpotDetailsProps {
 
 export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
   const [spot, createComment] = useSpot(spotId)
-  const [body, setBody] = useState('')
 
   if (!spot) {
     return <div>Loading...</div>
@@ -65,22 +62,7 @@ export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
         ))}
       </Comments>
 
-      <AddComment
-        onSubmit={e => {
-          e.preventDefault()
-          createComment(body)
-          setBody('')
-        }}
-      >
-        <textarea
-          placeholder="Write something about this spot..."
-          value={body}
-          onChange={e => setBody(e.target.value)}
-        />
-        <ButtonWrapper>
-          <Button type="submit">Send</Button>
-        </ButtonWrapper>
-      </AddComment>
+      <AddComment onSave={createComment} />
     </main>
   )
 }

@@ -64,25 +64,3 @@ export const CommentHeader = styled.p`
   color: ${color('neutral50')};
   font-style: italic;
 `
-
-export const AddComment = styled.form`
-  margin-top: ${spacing('default')};
-  background: #fff;
-
-  textarea {
-    display: block;
-    width: 100%;
-    padding: ${spacing('inputPadding')};
-    font-size: inherit;
-  }
-
-  button {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-`
-
-export const ButtonWrapper = styled.div`
-  padding: 10px;
-`
