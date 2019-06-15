@@ -24,6 +24,7 @@ export interface DetailedSpot extends Spot {
     body: string
     createdAt: Date
   }>
+  tags: string[]
 }
 
 export class CreateSpotCommand {
@@ -31,6 +32,7 @@ export class CreateSpotCommand {
   constructor(
     public name: string,
     public location: Location,
+    public tags: string[],
     public description?: string
   ) {}
 }

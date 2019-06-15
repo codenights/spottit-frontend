@@ -1,40 +1,41 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import { generateTags } from "../../domain/helpers/generateTags";
+import { generateTags } from '../../domain/helpers/generateTags'
 
-import { useDependency } from "../../di";
-import { Label, Input, Textarea, FormGroup, SubmitGroup } from "../../ui/Form";
-import { Button, Link } from "../../ui/Button";
-import { Map } from "../../ui/Map";
+import { useDependency } from '../../di'
+import { Label, Input, Textarea, FormGroup, SubmitGroup } from '../../ui/Form'
+import { Button, Link } from '../../ui/Button'
+import { Map } from '../../ui/Map'
 
-import { useHistory } from "../../hooks/useHistory";
-import { Content } from "./styles";
+import { useHistory } from '../../hooks/useHistory'
+import { Content } from './styles'
 
 export interface NewSpotProps {
-  latitude: number;
-  longitude: number;
+  latitude: number
+  longitude: number
 }
 
 export const NewSpot: React.FC<NewSpotProps> = ({ latitude, longitude }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
-  const history = useHistory();
-  const useCase = useDependency("createSpot");
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [tags, setTags] = useState('')
+  const history = useHistory()
+  const useCase = useDependency('createSpot')
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
     useCase
       .execute(
         title,
         {
           latitude,
-          longitude
+          longitude,
         },
+        tags.replace(/#/g, '').split(' '),
         description
       )
-      .then(() => history.replace("/s"));
-  };
+      .then(() => history.replace('/s'))
+  }
 
   return (
     <div>
@@ -42,7 +43,7 @@ export const NewSpot: React.FC<NewSpotProps> = ({ latitude, longitude }) => {
         zoomLevel={17}
         currentPosition={{ latitude, longitude }}
         center={{ latitude, longitude }}
-        style={{ height: "150px" }}
+        style={{ height: '150px' }}
         isFixed={true}
       />
 
@@ -92,5 +93,5 @@ export const NewSpot: React.FC<NewSpotProps> = ({ latitude, longitude }) => {
         </form>
       </Content>
     </div>
-  );
-};
+  )
+}

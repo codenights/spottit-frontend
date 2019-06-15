@@ -68,6 +68,7 @@ export class SpotRepositoryGql implements SpotRepository {
         latitude: createSpot.location.latitude,
         longitude: createSpot.location.longitude,
         name: createSpot.name,
+        tags: createSpot.tags,
       })
       .then(response => response.createSpot)
   }

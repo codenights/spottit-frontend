@@ -38,7 +38,7 @@ export const Body = styled.div`
 `
 
 export const AuthoredBy = styled.p`
-  margin-bottom: ${spacing('default')};
+  margin: ${spacing('default')} 0;
 
   span {
     font-weight: bold;

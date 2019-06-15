@@ -20,5 +20,6 @@ query FetchSpot($id: String!) {
       body
       createdAt
     }
+    tags
   }
 }

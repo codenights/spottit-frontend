@@ -53,6 +53,7 @@ const getDetailedSpot = (
       id: 'comment-1',
     },
   ],
+  tags: ['tag-1'],
   ...overrides,
 })
 
@@ -119,6 +120,7 @@ describe('SpotRepositoryGql', () => {
           id: 'comment-1',
         },
       ],
+      tags: ['tag-1'],
     })
   })
 
@@ -185,6 +187,7 @@ describe('SpotRepositoryGql', () => {
     const createSpotCommand = new CreateSpotCommand(
       'spot-name',
       { latitude: 0.1, longitude: 1.0 },
+      ['tag1'],
       'spot-description'
     )
     ;(graphqlService.mutate as jest.Mock).mockResolvedValue({
@@ -201,6 +204,7 @@ describe('SpotRepositoryGql', () => {
       latitude: 0.1,
       longitude: 1,
       name: 'spot-name',
+      tags: ['tag1'],
     })
   })
 })

@@ -34,14 +34,15 @@ describe('CreateSpot', () => {
       latitude: 1,
       longitude: 1,
     }
+    const tags = ['tag1']
     ;(repository.createSpot as jest.Mock).mockResolvedValue(createSpot())
 
     // When
-    const result: any = await useCase.execute(name, location)
+    const result: any = await useCase.execute(name, location, tags)
 
     // Then
     expect(repository.createSpot).toHaveBeenCalledTimes(1)
-    expect(repository.createSpot).toHaveBeenCalledWith({ name, location })
+    expect(repository.createSpot).toHaveBeenCalledWith({ name, location, tags })
     expect(result.data).toEqual(createSpot())
     expect(result.success).toEqual(true)
   })
@@ -53,17 +54,19 @@ describe('CreateSpot', () => {
       latitude: 1,
       longitude: 1,
     }
+    const tags = ['tag1']
     const description = 'spot description'
     ;(repository.createSpot as jest.Mock).mockResolvedValue(createSpot())
 
     // When
-    const result: any = await useCase.execute(name, location, description)
+    const result: any = await useCase.execute(name, location, tags, description)
 
     // Then
     expect(repository.createSpot).toHaveBeenCalledTimes(1)
     expect(repository.createSpot).toHaveBeenCalledWith({
       name,
       location,
+      tags,
       description,
     })
     expect(result.data).toEqual(createSpot())
@@ -72,26 +75,21 @@ describe('CreateSpot', () => {
 
   it('execute: should return a failure if an error is thrown', async () => {
     // Given
-    const name = 'spot name'
-    const location: Location = {
-      latitude: 1,
-      longitude: 1,
-    }
-    const description = undefined
     ;(repository.createSpot as jest.Mock).mockRejectedValue(
       new Error('Test error')
     )
 
     // When
-    const result: any = await useCase.execute(name, location, description)
+    const result: any = await useCase.execute(
+      '',
+      {
+        latitude: 1,
+        longitude: 1,
+      },
+      []
+    )
 
     // Then
-    expect(repository.createSpot).toHaveBeenCalledTimes(1)
-    expect(repository.createSpot).toHaveBeenCalledWith({
-      name,
-      location,
-      description,
-    })
     expect(result.data).toBeUndefined()
     expect(result.error).toEqual(new Error('Test error'))
     expect(result.success).toEqual(false)

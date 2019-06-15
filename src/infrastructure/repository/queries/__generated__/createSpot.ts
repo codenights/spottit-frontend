@@ -30,4 +30,5 @@ export interface CreateSpotVariables {
   description?: string | null;
   latitude: number;
   longitude: number;
+  tags: string[];
 }

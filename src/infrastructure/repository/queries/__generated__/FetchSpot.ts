@@ -40,6 +40,7 @@ export interface FetchSpot_spot {
   location: FetchSpot_spot_location;
   author: FetchSpot_spot_author;
   comments: FetchSpot_spot_comments[];
+  tags: string[];
 }
 
 export interface FetchSpot {

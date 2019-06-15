@@ -14,6 +14,7 @@ import {
   CommentHeader,
 } from './styles'
 import { AddComment } from './AddComment'
+import { Hashtag, Hashtags } from '../../ui/Hashtag'
 
 export interface SpotDetailsProps {
   spotId: string
@@ -42,6 +43,12 @@ export const SpotDetails: React.FC<SpotDetailsProps> = ({ spotId }) => {
       </Header>
 
       <Body>
+        <Hashtags>
+          {spot.tags.map(tag => (
+            <Hashtag>{tag}</Hashtag>
+          ))}
+        </Hashtags>
+
         <AuthoredBy>
           Added by <span>{spot.author.username}</span>
         </AuthoredBy>

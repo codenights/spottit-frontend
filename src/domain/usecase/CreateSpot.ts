@@ -21,9 +21,15 @@ export class CreateSpot {
   public execute(
     name: string,
     location: Location,
+    tags: string[],
     description?: string
   ): Promise<UseCaseResult<Spot, Error>> {
-    const createSpotCommand = new CreateSpotCommand(name, location, description)
+    const createSpotCommand = new CreateSpotCommand(
+      name,
+      location,
+      tags,
+      description
+    )
 
     return this.spotRepository
       .createSpot(createSpotCommand)
