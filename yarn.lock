@@ -1623,10 +1623,10 @@
   dependencies:
     "@types/jest-diff" "*"
 
-"@types/leaflet@*", "@types/leaflet@^1.4.5":
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.4.5.tgz#1d3704dfd3e391e41e96ef8c6bd6f255b6c4ec0e"
-  integrity sha512-Il58swdE/W77eNR56D9Ent1hDdTDKF68loeszyEOAtnfBQxHwJRoTnODjnXbAFFGqXS5ifP3rXHK1qKYVulNAw==
+"@types/leaflet@*", "@types/leaflet@^1.5.5":
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.5.5.tgz#006c0aa89c4b5e62941717fa71a09e846423536c"
+  integrity sha512-Eyh1LMmW4OFgafL6rjLyGkMqFS5IzgwWHMSgTKbrsvwLjLaWH8Ae8CV5liRe8HSM731oOVDwAMIZgg9P0SO9tg==
   dependencies:
     "@types/geojson" "*"
 
